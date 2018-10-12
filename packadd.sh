@@ -17,6 +17,7 @@ init()
 {
     mkdir -p ~/.vim/pack/packages
     cd ~/.vim
+    printf '*\n!pack/packages\n' > .gitignore
     git init
     git submodule init
     printf "${YELLOW}Packadd initiated${NC}\n"
@@ -63,7 +64,7 @@ elif [ "$1" = "-u" ]; then
     check_init
     cd ~/.vim
     git submodule update --remote --merge
-    git commit -m "Updated packages" >&- # >&- Hides output of cmd
+    git commit -m "Updated packages"
     printf "${GREEN}Packages updated${NC}\n"
     exit 0
 elif [ "$1" = "-d" ]; then
