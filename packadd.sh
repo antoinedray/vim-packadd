@@ -48,7 +48,8 @@ if [ "$1" = "-i" ]; then
     cd ~/.vim
     printf "Enter git url: "
     read url
-    name=$(echo "${url}" | sed 's|.*github.com/.*/\([^/]*\).git|\1|g')
+    file="${url##*/}"
+    name="${file%.git}"
     git submodule add $url pack/packages/start/$name
     git add .gitmodules pack/packages/start/$name
     git commit -m "$name installed"
