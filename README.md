@@ -2,11 +2,21 @@ Installing Vim packages has never been simpler
 =======================================
 This python script takes all the pain of installing Vim packages away, one line in the command line is now all it takes !
 
+For now this scripts only supports git repositories (ex: vim-airline, gruvbox,...).
+
 Currently the below commands have been implemented:
 
 - install <url> (install package with the given url)
 - uninstall <package> (uninstall the package)
 - upgrade (upgrade all packages installed with this script)
+
+## Requirements
+
+The following are needed to run the script:
+
+- python3 (need to check if runs on python < 3x)
+- git
+- GitPython
 
 ## Usage
 ```
