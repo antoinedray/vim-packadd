@@ -1,5 +1,7 @@
 Installing Vim packages has never been simpler
 =======================================
+[![Build Status](https://travis-ci.org/rhysd/vim-clang-format.svg?branch=master)](https://travis-ci.org/rhysd/vim-clang-format)
+
 This python script takes all the pain of installing Vim packages away, one line in the command line is now all it takes !
 
 For now this scripts only supports git repositories (ex: vim-airline, gruvbox,...).
