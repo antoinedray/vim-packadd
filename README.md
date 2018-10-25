@@ -21,15 +21,15 @@ The following are needed to run the script:
 - GitPython
 
 ## Usage
-### Installing
+#### Installing
 ```
 $ packadd install <url>
 ```
-### Uninstalling
+#### Uninstalling
 ```
 $ packadd uninstall <package-name>
 ```
-### Upgrading
+#### Upgrading
 ```
 $ packadd upgrade
 ```
