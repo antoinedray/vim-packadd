@@ -1,5 +1,4 @@
 mkdir ~/.scripts
-chmod u+x packadd.sh
-cp packadd.sh ~/.scripts
-alias packadd="/bin/sh ~/.scripts/packadd.sh" >> ~/.bashrc
-alias packadd="/bin/sh ~/.scripts/packadd.sh" >> ~/.bash_profile
+cp packadd.py ~/.scripts
+alias packadd="python3 ~/.scripts/packadd.py" >> ~/.bashrc
+alias packadd="python3 ~/.scripts/packadd.py" >> ~/.bash_profile
