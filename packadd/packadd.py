@@ -1,4 +1,12 @@
-import os, git, sys
+# -*- coding: utf-8 -*-
+
+
+"""packadd.packadd: provides entry point main()."""
+
+
+__version__ = "0.0.1"
+
+import os, sys, git
 
 argc = len(sys.argv)
 
@@ -90,5 +98,3 @@ def main():
         uninstall()
     else:
         print(p.UNKNOWN + cmd)
-
-main()
