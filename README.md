@@ -4,6 +4,8 @@ Installing Vim packages has never been simpler
 
 This python script takes all the pain of installing Vim packages away, one line in the command line is now all it takes !
 
+This script is based on the all new Vim8 native third-party package loading.
+
 For now this scripts only supports git repositories (ex: vim-airline, gruvbox,...).
 
 Currently the below commands have been implemented:
@@ -16,9 +18,9 @@ Currently the below commands have been implemented:
 
 The following are needed to run the script:
 
+- Vim (version 8+)
 - python3 (need to check if runs on python < 3x)
 - git
-- GitPython
 
 ## Usage
 #### Installing
