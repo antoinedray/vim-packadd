@@ -20,16 +20,15 @@ The following are needed to run the script:
 
 - Vim (version 8+)
 - python3 (need to check if runs on python < 3x)
+- pip
 - git
 
 ## Install Vim-Packadd
 
-Install Vim-Packadd in 3 easy steps !
+Install Vim-Packadd in 1 easy steps !
 
 ```
-$ git clone git@github.com:cloudnodes/vim-packadd.git
-$ cd vim-packadd
-$ pip install .
+$ pip install vim-packadd --user
 ```
 
 ## Usage
