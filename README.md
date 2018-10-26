@@ -22,6 +22,16 @@ The following are needed to run the script:
 - python3 (need to check if runs on python < 3x)
 - git
 
+## Install Vim-Packadd
+
+Install Vim-Packadd in 3 easy steps !
+
+```
+$ git clone git@github.com:cloudnodes/vim-packadd.git
+$ cd vim-packadd
+$ pip install .
+```
+
 ## Usage
 #### Installing
 ```
