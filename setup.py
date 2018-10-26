@@ -5,7 +5,7 @@
 
 
 import re
-from setuptools import setup
+from distutils.core import setup
 
 
 version = re.search(
@@ -15,10 +15,6 @@ version = re.search(
     ).group(1)
 
 
-with open("README.rst", "rb") as f:
-    long_descr = f.read().decode("utf-8")
-
-
 setup(
     name = "vim-packadd",
     packages = ["packadd"],
@@ -26,8 +22,7 @@ setup(
         "console_scripts": ['packadd = packadd.packadd:main']
         },
     version = version,
-    description = "Plugin manager for Vim8.",
-    long_description = long_descr,
+    description = "Package manager for Vim8.",
     author = "Antoine Dray",
     author_email = "antoine.dray@epita.fr",
     license='MIT',
