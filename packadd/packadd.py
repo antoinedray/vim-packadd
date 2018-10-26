@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.1"
 
 import os, sys, git
 
@@ -51,9 +51,15 @@ def check_repo():
     except git.exc.InvalidGitRepositoryError:
         init_repo()
 
+def listall():
+    check_repo()
+    repo = git.Repo(vim_dir)
+    for sm in repo.submodules:
+        print('  ' + sm.name)
+
 def upgrade():
     check_repo()
-    print(p.INFO + 'Upgrading all packages...')
+    print(p.PRE_INFO + 'Upgrading all packages...')
     repo = git.Repo(vim_dir)
     repo.submodule_update(recursive=False)
     print(p.PRE_OK + 'Packages updated')
@@ -64,7 +70,7 @@ def install():
         return
     url = sys.argv[2]
     check_repo()
-    print(p.INFO + 'Installing...')
+    print(p.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
     repo = git.Repo(vim_dir)
     repo.create_submodule(name=name, path=start_packages + name, url=url, branch='master')
@@ -77,7 +83,7 @@ def uninstall():
         return
     name = sys.argv[2]
     check_repo()
-    print(p.INFO + 'Uninstalling ' + name + '...')
+    print(p.PRE_INFO + 'Uninstalling ' + name + '...')
     repo = git.Repo(vim_dir)
     for sm in repo.submodules:
         if sm.name == name:
@@ -98,5 +104,7 @@ def main():
         install()
     elif cmd == 'uninstall':
         uninstall()
+    elif cmd == 'list':
+        listall()
     else:
         print(p.UNKNOWN + cmd)
