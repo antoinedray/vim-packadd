@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.2.2"
+__version__ = "0.3.0"
 
 import os, sys, git
 
@@ -14,13 +14,14 @@ class c:
     INFO = '\033[94m'
     OK = '\033[92m'
     WARN = '\033[93m'
-    FAIL = '\033[91m'
+    FAIL = '\033[31m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
 
 class p:
     PRE_INFO = c.INFO + c.BOLD + '> ' + c.END
+    PRE_FAIL = c.FAIL + c.BOLD + '> ' + c.END
     PRE_OK = c.OK + c.BOLD + '> ' + c.END
     PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
     INV_USAGE = c.FAIL + 'Error:' + c.END + ' Invalid usage: '
@@ -81,9 +82,12 @@ def install():
     print(p.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
     repo = git.Repo(vim_dir)
-    repo.create_submodule(name=name, path=start_packages + name, url=url, branch='master')
-    repo.index.commit(name + ' installed')
-    print(p.PRE_OK + name + ' installed')
+    try:
+        repo.create_submodule(name=name, path=start_packages + name, url=url, branch='master')
+        repo.index.commit(name + ' installed')
+        print(p.PRE_OK + name + ' installed')
+    except git.exc.GitCommandError:
+        print(p.PRE_FAIL + 'Invalid git package url')
 
 def uninstall():
     if argc < 3:
