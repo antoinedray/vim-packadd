@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 import os, sys, git
 
@@ -22,6 +22,7 @@ class c:
 class p:
     PRE_INFO = c.INFO + c.BOLD + '> ' + c.END
     PRE_OK = c.OK + c.BOLD + '> ' + c.END
+    PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
     INV_USAGE = c.FAIL + 'Error:' + c.END + ' Invalid usage: '
     USAGE = 'Example usage:\n  packadd install FORMULA...\n  packadd upgrade\n  packadd uninstall FORMULA...'
     UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
@@ -41,6 +42,7 @@ def init_repo():
         vim.write('*\n!pack/packages\n')
     repo = git.Repo.init(vim_dir)
     sub = repo.git.submodule('init')
+    repo.index.commit('Structure initialised')
     print(p.PRE_INFO + 'Packadd initialized')
 
 def check_repo():
@@ -54,8 +56,14 @@ def check_repo():
 def listall():
     check_repo()
     repo = git.Repo(vim_dir)
-    for sm in repo.submodules:
-        print('  ' + sm.name)
+    print(p.PRE_INFO + 'Listing...')
+    if not repo.submodules:
+        print(p.PRE_INFO + 'No packages installed yet')
+    else:
+        print()
+        for sm in repo.submodules:
+            print(p.PRE_LIST + sm.name)
+        print()
 
 def upgrade():
     check_repo()
