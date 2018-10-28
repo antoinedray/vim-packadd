@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 import os, sys, git
 
@@ -25,12 +25,16 @@ class p:
     PRE_OK = c.OK + c.BOLD + '> ' + c.END
     PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
     INV_USAGE = c.FAIL + 'Error:' + c.END + ' Invalid usage: '
-    USAGE = 'Example usage:\n  packadd install FORMULA...\n  packadd upgrade\n  packadd uninstall FORMULA...'
+    USAGE = 'Example usage:\n  packadd install [URL]\n  packadd upgrade\n  packadd uninstall [PACKAGE]'
+    FURTH_HELP = 'Further help:\n  https://github.com/cloudnodes/vim-packadd'
     UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
 vim_dir = os.environ['HOME'] + '/.vim'
 start_packages = os.environ['HOME'] + '/.vim/pack/packages/start/'
 opt_packages = os.environ['HOME'] + '/.vim/pack/packages/opt/'
+
+def help():
+    print(p.USAGE + '\n\n' + p.FURTH_HELP)
 
 def create_structure():
     if not os.path.isdir(start_packages):
@@ -107,7 +111,7 @@ def uninstall():
 
 def main():
     if len(sys.argv) < 2:
-        print(p.USAGE)
+        help()
         return
     cmd = sys.argv[1]
     if cmd == 'upgrade':
@@ -118,5 +122,7 @@ def main():
         uninstall()
     elif cmd == 'list':
         listall()
+    elif cmd == 'help' or cmd == '-h':
+        help()
     else:
         print(p.UNKNOWN + cmd)
