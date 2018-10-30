@@ -9,10 +9,10 @@ command_exists () {
 
 packadd_fix() {
     if ! command_exists packadd; then
-        $(pip install --user vim-packadd) >&-
+        $(pip install --user vim-packadd)
     fi
 }
 
 packadd_fix;
 
-\packadd
+\packadd $@
