@@ -67,7 +67,7 @@ $ packadd upgrade
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 
-## A note for Epita students
+## A note for EPITA students
 
 As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
 
