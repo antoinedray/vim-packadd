@@ -17,5 +17,5 @@ mv packadd-fix.sh ~/afs/.pip/
 
 printf "[ ${YELLOW}INFO${NC} ] Adding alias to your .bashrc\n"
 
-echo "# Setup for Vim Packadd, do not remove"
+echo "# Setup for Vim Packadd, do not remove" >> ~/.bashrc
 echo "alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'" >> ~/.bashrc
