@@ -75,5 +75,5 @@ As pip installed packages gets deleted everytime you reboot the computer, I wrot
 $ git clone git@github.com:cloudnodes/vim-packadd.git
 $ cd vim-packadd/epita
 $ ./install.sh
-$ alias packadd="/bin/sh ~/.vim/packadd-fix.sh"
+$ echo "alias packadd='/bin/sh ~/.vim/packadd-fix.sh'" >> ~/.bashrc
 ```
