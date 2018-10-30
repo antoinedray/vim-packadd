@@ -11,12 +11,11 @@ fi
 
 chmod u+x packadd-fix.sh
 
-printf "[ ${YELLOW}INFO${NC} ] Adding patch to .vim folder...\n"
+printf "[ ${YELLOW}INFO${NC} ] Adding patch to .pip folder...\n"
 
 mv packadd-fix.sh ~/afs/.pip/
 
-printf "[ ${YELLOW}INFO${NC} ] Please add the following line to your .bashrc:\n"
+printf "[ ${YELLOW}INFO${NC} ] Adding alias to your .bashrc\n"
 
-printf "\n\talias packadd="/bin/sh ~/afs/.pip/packadd-fix.sh"\n\n"
-
+echo "# Setup for Vim Packadd, do not remove"
 echo "alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'" >> ~/.bashrc
