@@ -9,6 +9,11 @@ import os, sys, git
 
 argc = len(sys.argv)
 
+class path:
+    VIM = os.environ['HOME'] + '/.vim'
+    START = os.environ['HOME'] + '/.vim/pack/packages/start/'
+    OPT = os.environ['HOME'] + '/.vim/pack/packages/opt/'
+
 class c:
     HEADER = '\033[95m'
     INFO = '\033[94m'
@@ -29,23 +34,20 @@ class p:
     FURTH_HELP = 'Further help:\n  https://github.com/cloudnodes/vim-packadd'
     UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
-vim_dir = os.environ['HOME'] + '/.vim'
-start_packages = os.environ['HOME'] + '/.vim/pack/packages/start/'
-opt_packages = os.environ['HOME'] + '/.vim/pack/packages/opt/'
 
 def help():
     print(p.USAGE + '\n\n' + p.FURTH_HELP)
 
 def create_structure():
-    if not os.path.isdir(start_packages):
-        os.makedirs(start_packages)
-    if not os.path.isdir(opt_packages):
-        os.makedirs(opt_packages)
+    if not os.path.isdir(path.START):
+        os.makedirs(path.START)
+    if not os.path.isdir(path.OPT):
+        os.makedirs(path.OPT)
 
 def init_repo():
-    with open(vim_dir + '.gitignore', 'a') as vim:
+    with open(path.VIM + '.gitignore', 'a') as vim:
         vim.write('*\n!pack/packages\n')
-    repo = git.Repo.init(vim_dir)
+    repo = git.Repo.init(path.VIM)
     sub = repo.git.submodule('init')
     repo.index.commit('Structure initialised')
     print(p.PRE_INFO + 'Packadd initialized')
@@ -78,7 +80,7 @@ def upgrade():
     print(p.PRE_OK + 'Packages updated')
 
 def install():
-    if argc < 3:
+    if argc != 3:
         print(p.INV_USAGE + 'This command requires an url')
         return
     url = sys.argv[2]
