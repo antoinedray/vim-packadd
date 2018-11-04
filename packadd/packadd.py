@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 import os, sys, git
 
@@ -53,16 +53,16 @@ def init_repo():
     print(p.PRE_INFO + 'Packadd initialized')
 
 def check_repo():
-    if not os.path.isdir(start_packages) or not os.path.isdir(opt_packages):
+    if not os.path.isdir(path.START) or not os.path.isdir(path.OPT):
        create_structure()
     try:
-        git.Repo(vim_dir)
+        git.Repo(path.VIM)
     except git.exc.InvalidGitRepositoryError:
         init_repo()
 
 def listall():
     check_repo()
-    repo = git.Repo(vim_dir)
+    repo = git.Repo(path.VIM)
     print(p.PRE_INFO + 'Listing...')
     if not repo.submodules:
         print(p.PRE_INFO + 'No packages installed yet')
@@ -75,7 +75,7 @@ def listall():
 def upgrade():
     check_repo()
     print(p.PRE_INFO + 'Upgrading all packages...')
-    repo = git.Repo(vim_dir)
+    repo = git.Repo(path.VIM)
     repo.submodule_update(recursive=False)
     print(p.PRE_OK + 'Packages updated')
 
@@ -87,9 +87,9 @@ def install():
     check_repo()
     print(p.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
-    repo = git.Repo(vim_dir)
+    repo = git.Repo(path.VIM)
     try:
-        repo.create_submodule(name=name, path=start_packages + name, url=url, branch='master')
+        repo.create_submodule(name=name, path=path.START + name, url=url, branch='master')
         repo.index.commit(name + ' installed')
         print(p.PRE_OK + name + ' installed')
     except git.exc.GitCommandError:
@@ -102,7 +102,7 @@ def uninstall():
     name = sys.argv[2]
     check_repo()
     print(p.PRE_INFO + 'Uninstalling ' + name + '...')
-    repo = git.Repo(vim_dir)
+    repo = git.Repo(path.VIM)
     for sm in repo.submodules:
         if sm.name == name:
             sm.remove()
