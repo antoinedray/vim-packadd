@@ -34,11 +34,10 @@ class p:
     FURTH_HELP = 'Further help:\n  https://github.com/cloudnodes/vim-packadd'
     UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
-
 def help():
     print(p.USAGE + '\n\n' + p.FURTH_HELP)
 
-def create_structure():
+def create_folders():
     if not os.path.isdir(path.START):
         os.makedirs(path.START)
     if not os.path.isdir(path.OPT):
@@ -54,7 +53,7 @@ def init_repo():
 
 def check_repo():
     if not os.path.isdir(path.START) or not os.path.isdir(path.OPT):
-       create_structure()
+       create_folders()
     try:
         git.Repo(path.VIM)
     except git.exc.InvalidGitRepositoryError:
@@ -96,7 +95,7 @@ def install():
         print(p.PRE_FAIL + 'Invalid git package url')
 
 def uninstall():
-    if argc < 3:
+    if argc != 3:
         print(p.INV_USAGE + 'This command requires a package name')
         return
     name = sys.argv[2]
