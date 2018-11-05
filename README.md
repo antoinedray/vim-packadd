@@ -72,7 +72,7 @@ $ packadd upgrade
 As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
 
 ```
-$ git clone git@github.com:cloudnodes/vim-packadd.git
+$ git clone https://github.com/cloudnodes/vim-packadd.git
 $ cd vim-packadd/epita
 $ ./install.sh
 ```
