@@ -27,21 +27,21 @@ The following are needed to run the script:
 Install Vim-Packadd in 1 easy steps !
 
 ```
-$ pip install vim-packadd --user
+pip install vim-packadd --user
 ```
 
 ## Usage
 #### Installing
 ```
-$ packadd install <url>
+packadd install <url>
 ```
 #### Uninstalling
 ```
-$ packadd uninstall <package-name>
+packadd uninstall <package-name>
 ```
 #### Upgrading
 ```
-$ packadd upgrade
+packadd upgrade
 ```
 ## License
 
@@ -72,7 +72,7 @@ $ packadd upgrade
 As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
 
 ```
-$ git clone https://github.com/cloudnodes/vim-packadd.git
-$ cd vim-packadd/epita
-$ ./install.sh
+git clone https://github.com/cloudnodes/vim-packadd.git
+cd vim-packadd/epita
+./install.sh
 ```
