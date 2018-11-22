@@ -91,6 +91,8 @@ def install():
         print(p.INV_USAGE + 'This command requires an url')
         return
     url = sys.argv[2]
+    if url[-1] == '/':
+        url = url[:-1]
     check_repo()
     print(p.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
