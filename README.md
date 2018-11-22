@@ -30,6 +30,8 @@ Install Vim-Packadd in 1 easy steps !
 pip install vim-packadd --user
 ```
 
+Note: If you already installed packages without packadd, it is recomended to reinstall them so that packadd work on all packages installed on your system.
+
 ## Usage
 #### Installing
 ```
