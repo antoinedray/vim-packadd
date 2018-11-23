@@ -30,7 +30,7 @@ class p:
     PRE_OK = c.OK + c.BOLD + '> ' + c.END
     PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
     INV_USAGE = c.FAIL + 'Error:' + c.END + ' Invalid usage: '
-    USAGE = 'Example usage:\n  packadd install [URL]\n  packadd upgrade\n  packadd uninstall [PACKAGE]'
+    USAGE = 'Example usage:\n  packadd install [URL]\n  packadd upgrade\n  packadd uninstall [PACKAGE]\n  packadd list'
     FURTH_HELP = 'Further help:\n  https://github.com/cloudnodes/vim-packadd'
     UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
