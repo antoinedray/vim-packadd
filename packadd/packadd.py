@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
 
 import os, sys, git
 
@@ -34,13 +34,10 @@ class p:
     FURTH_HELP = 'Further help:\n  https://github.com/cloudnodes/vim-packadd'
     UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
-#class Progress(git.remote.RemoteProgress):
-#    def update(self, op_code, cur_count, max_count=None, message=''):
-#        print('Downloading: (==== {} ====)'.format(message))
-
 class Progress(git.remote.RemoteProgress):
     def update(self, op_code, cur_count, max_count=None, message=''):
-        print(message, str(cur_count / (max_count or 100.0)) + '%')
+        rate = str((cur_count / (max_count or cur_count)) * 100) + '%'
+        print('{0: <{width}}'.format('\t' + rate + '\t' + message, width=80), end='\r')
 
 def help():
     print(p.USAGE + '\n\n' + p.FURTH_HELP)
@@ -84,7 +81,7 @@ def upgrade():
     print('\n' + p.PRE_INFO + 'Upgrading all packages...\n')
     repo = git.Repo(path.VIM)
     repo.submodule_update(init=True, recursive=False, progress=Progress())
-    print('\n' + p.PRE_OK + 'Packages updated\n')
+    print('\n\n' + p.PRE_OK + 'Packages updated\n')
 
 def install():
     if argc != 3:
