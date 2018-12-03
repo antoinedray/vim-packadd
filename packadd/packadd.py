@@ -3,9 +3,9 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.4"
+__version__ = "0.3.5"
 
-import os, sys, git
+import os, sys, git, re
 
 argc = len(sys.argv)
 
@@ -36,8 +36,14 @@ class p:
 
 class Progress(git.remote.RemoteProgress):
     def update(self, op_code, cur_count, max_count=None, message=''):
-        rate = str((cur_count / (max_count or cur_count)) * 100) + '%'
-        print('{0: <{width}}'.format('\t' + rate + '\t' + message, width=80), end='\r')
+        pre = (p.PRE_INFO, p.PRE_OK)[match(message, '^Done')]
+        print(pre + message)
+
+def match(line, regex):
+    reg = re.compile(regex)
+    if re.match(reg, line):
+        return 1
+    return 0
 
 def help():
     print(p.USAGE + '\n\n' + p.FURTH_HELP)
@@ -81,7 +87,7 @@ def upgrade():
     print('\n' + p.PRE_INFO + 'Upgrading all packages...\n')
     repo = git.Repo(path.VIM)
     repo.submodule_update(init=True, recursive=False, progress=Progress())
-    print('\n\n' + p.PRE_OK + 'Packages updated\n')
+    print('\n' + p.PRE_OK + 'Packages updated\n')
 
 def install():
     if argc != 3:
