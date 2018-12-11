@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.5"
+__version__ = "0.3.6"
 
 import os, sys, git, re
 
@@ -26,18 +26,21 @@ class c:
 
 class p:
     PRE_INFO = c.INFO + c.BOLD + '> ' + c.END
+    PRE_INFO_L = c.INFO + c.BOLD + '==> ' + c.END
     PRE_FAIL = c.FAIL + c.BOLD + '> ' + c.END
+    PRE_FAIL_L = c.FAIL + c.BOLD + '==> ' + c.END
     PRE_OK = c.OK + c.BOLD + '> ' + c.END
+    PRE_OK_L = c.OK + c.BOLD + '==> ' + c.END
     PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
     INV_USAGE = c.FAIL + 'Error:' + c.END + ' Invalid usage: '
     USAGE = 'Example usage:\n  packadd install [URL]\n  packadd upgrade\n  packadd uninstall [PACKAGE]\n  packadd list'
-    FURTH_HELP = 'Further help:\n  https://github.com/cloudnodes/vim-packadd'
+    FURTH_HELP = 'Further help:\n  https://github.com/antoinedray/vim-packadd'
     UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
 class Progress(git.remote.RemoteProgress):
-    def update(self, op_code, cur_count, max_count=None, message=''):
-        pre = (p.PRE_INFO, p.PRE_OK)[match(message, '^Done')]
-        print(pre + message)
+    def update(self, op_code, cur_count, max_count, message):
+        pre = (p.PRE_INFO_L, p.PRE_OK_L)[match(message, '^Done')]
+        print(pre + ' (' + str((cur_count / max_count * 100, 100)[cur_count == 0]) + '%) ' + message)
 
 def match(line, regex):
     reg = re.compile(regex)
