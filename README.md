@@ -32,6 +32,16 @@ pip install vim-packadd --user
 
 **Note:** If you already installed packages without packadd, it is recomended to reinstall them so that packadd work on all packages installed on your system.
 
+### Installing for EPITA students
+
+As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
+
+```
+git clone https://github.com/cloudnodes/vim-packadd.git
+cd vim-packadd/epita
+./install.sh
+```
+
 ## Usage
 #### Installing
 ```
@@ -68,13 +78,3 @@ packadd upgrade
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
-
-## A note for EPITA students
-
-As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
-
-```
-git clone https://github.com/cloudnodes/vim-packadd.git
-cd vim-packadd/epita
-./install.sh
-```
