@@ -15,4 +15,5 @@ packadd_fix() {
 
 packadd_fix;
 
+# Runs actual packadd program
 \packadd $@
