@@ -53,13 +53,17 @@ cd vim-packadd/epita
 ```
 
 ## Usage
+#### Listing
+```
+packadd list
+```
 #### Installing
 ```
 packadd install <url>
 ```
 #### Uninstalling
 ```
-packadd uninstall <package-name>
+packadd uninstall <package_name>
 ```
 #### Upgrading
 ```
