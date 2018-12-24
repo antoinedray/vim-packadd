@@ -33,6 +33,17 @@ pip install vim-packadd --user
 **Note:** If you already installed packages without packadd, it is recomended to reinstall them so that packadd work on all packages installed on your system.
 
 ### Installing for EPITA students
+First and foremost, you need to make Vim packages persistent on the afs, to do so:\
+Create the vim folder:
+```
+mkdir ~/afs/config/vim && mkdir ~/.vim
+```
+Create symlink between the two folders:
+```
+ln -s ~/.vim ~/afs/config/vim
+```
+Then, add the *vim* folder to the install.sh in ~/afs/config/install.sh
+* Add the vim folder in install.sh
 
 As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
 
