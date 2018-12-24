@@ -43,7 +43,6 @@ Create symlink between the two folders:
 ln -s ~/.vim ~/afs/config/vim
 ```
 Then, add the *vim* folder to the install.sh in ~/afs/config/install.sh
-* Add the vim folder in install.sh
 
 As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
 
