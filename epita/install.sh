@@ -16,7 +16,6 @@ if [ ! -d "~/afs/.pip" ]; then
         printf "[  ${OK}OK${NC}  ] Created ~/afs/.pip dir successfully\n"
     else
         printf "[ ${FAIL}FAIL${NC} ] Could not create ~/afs/.pip dir\n"
-        exit 1
     fi
 fi
 
