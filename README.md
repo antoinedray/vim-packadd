@@ -40,7 +40,7 @@ mkdir ~/afs/config/vim && mkdir ~/.vim
 ```
 Create symlink between the two folders:
 ```
-ln -s ~/.vim ~/afs/config/vim
+ln -s ~/.vim ~/afs/.confs/vim
 ```
 Then, add the *vim* folder to the install.sh in ~/afs/config/install.sh
 
