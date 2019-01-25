@@ -1,7 +1,7 @@
 Installing Vim packages made simpler
 =======================================
 
-This python script takes all the pain of installing Vim packages away, one line in the command line is now all it takes !
+This python script takes all the pain of installing Vim packages away, one simple command in the CLI is now all it takes !
 
 This script is based on the all new Vim8 native third-party package loading.
 
