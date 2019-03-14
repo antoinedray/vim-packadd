@@ -9,20 +9,23 @@ steps:
 - name: build
   image: python:latest
   commands:
-  - pip install setuptools
-  - python setup.py sdist
+  - python3 --version
+  - pip3 install setuptools
+  - python3 setup.py sdist
 
 - name: install
   image: python:latest
   commands:
-  - pip install setuptools
-  - python setup.py install
+  - python3 --version
+  - pip3 install setuptools
+  - python3 setup.py install
 
 - name: test
   image: python:latest
   commands:
-  - pip install setuptools
-  - python setup.py install
+  - python3 --version
+  - pip3 install setuptools
+  - python3 setup.py install
   - test/test.sh
 
 - name: deploy
@@ -33,9 +36,10 @@ steps:
     PASSWORD:
       from_secret: password
   commands:
-  - pip install setuptools
-  - pip install twine
-  - python setup.py sdist
+  - python3 --version
+  - pip3 install setuptools
+  - pip3 install twine
+  - python3 setup.py sdist
   - ls dist
   - twine upload dist/$(ls dist) -u $USERNAME -p $PASSWORD
   when:
