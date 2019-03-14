@@ -1,7 +1,12 @@
 kind: pipeline
+name: default
+
+workspace:
+  base: /packadd
+  path: src/github.com/antoinedray/vim-packadd
 
 steps:
-- name: build source
+- name: build
   image: python:latest
   commands:
   - python setup.py sdist
