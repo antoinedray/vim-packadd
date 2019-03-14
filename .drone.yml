@@ -41,7 +41,7 @@ steps:
   - pip3 install twine
   - python3 setup.py sdist
   - ls dist
-  - twine upload dist/$(ls dist) -u $USERNAME -p $PASSWORD
+  - twine upload $(ls dist/*.tar.gz) -u $USERNAME -p $PASSWORD
   when:
     branch:
     - master
