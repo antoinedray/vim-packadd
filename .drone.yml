@@ -5,3 +5,9 @@ steps:
   image: python:latest
   commands:
   - python setup.py sdist
+
+- name: deploy
+  image: python:latest
+  commands:
+  - pip install twine
+  - twine upload dist/vim-packadd-0.3.7.tar.gz
