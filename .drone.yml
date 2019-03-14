@@ -18,8 +18,13 @@ steps:
 
 - name: deploy
   image: python:latest
+  environment:
+    USERNAME:
+      from_secret: username
+    PASSWORD:
+      from_secret: password
   commands:
   - pip install twine
   - python setup.py sdist
   - ls dist
-  #- twine upload dist/vim-packadd-0.3.7.tar.gz
+  - twine upload dist/$(ls dist) -u $USERNAME -p $PASSWORD
