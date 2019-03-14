@@ -29,5 +29,5 @@ setup(
     install_requires=[
           'gitpython',
       ],
-    url = "https://github.com/cloudnodes/vim-packadd",
-    )
+    url = "https://github.com/antoinedray/vim-packadd",
+)
