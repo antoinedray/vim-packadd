@@ -16,6 +16,11 @@ steps:
   commands:
   - python setup.py install
 
+- name: test
+  image: python:latest
+  commands:
+  - test/test.sh
+
 - name: deploy
   image: python:latest
   environment:
