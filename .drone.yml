@@ -9,16 +9,19 @@ steps:
 - name: build
   image: python:latest
   commands:
+  - pip install setuptools
   - python setup.py sdist
 
 - name: install
   image: python:latest
   commands:
+  - pip install setuptools
   - python setup.py install
 
 - name: test
   image: python:latest
   commands:
+  - pip install setuptools
   - python setup.py install
   - test/test.sh
 
@@ -30,6 +33,7 @@ steps:
     PASSWORD:
       from_secret: password
   commands:
+  - pip install setuptools
   - pip install twine
   - python setup.py sdist
   - ls dist
