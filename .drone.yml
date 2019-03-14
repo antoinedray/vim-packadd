@@ -1,0 +1,7 @@
+kind: pipeline
+
+steps:
+- name: build source
+  image: python:latest
+  commands:
+  - python setup.py sdist
