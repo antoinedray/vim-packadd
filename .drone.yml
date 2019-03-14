@@ -28,3 +28,6 @@ steps:
   - python setup.py sdist
   - ls dist
   - twine upload dist/$(ls dist) -u $USERNAME -p $PASSWORD
+  when:
+    branch:
+    - master
