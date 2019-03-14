@@ -18,14 +18,14 @@ steps:
   commands:
   - python3 --version
   - pip3 install setuptools
-  - python3 setup.py install
+  - python3 setup.py install --user
 
 - name: test
   image: python:latest
   commands:
   - python3 --version
   - pip3 install setuptools
-  - python3 setup.py install
+  - python3 setup.py install --user
   - test/test.sh
 
 - name: deploy
