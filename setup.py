@@ -5,7 +5,10 @@
 
 
 import re
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 
 version = re.search(
@@ -29,5 +32,5 @@ setup(
     install_requires=[
           'gitpython',
       ],
-    url = "https://github.com/cloudnodes/vim-packadd",
-    )
+    url = "https://github.com/antoinedray/vim-packadd",
+)
