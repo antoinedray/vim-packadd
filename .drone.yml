@@ -14,7 +14,7 @@ steps:
 - name: install
   image: python:latest
   commands:
-  - python setup install
+  - python setup.py install
 
 - name: deploy
   image: python:latest
