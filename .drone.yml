@@ -1,6 +1,10 @@
 kind: pipeline
 name: default
 
+platform:
+  os: linux
+  arch: arm
+
 workspace:
   base: /packadd
   path: src/github.com/antoinedray/vim-packadd
