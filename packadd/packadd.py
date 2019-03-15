@@ -3,7 +3,7 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.8"
+__version__ = "0.3.9"
 
 import os, sys, git, re
 
