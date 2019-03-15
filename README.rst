@@ -1,8 +1,11 @@
 Installing Vim packages has never been simpler
 =======================================
-[![Build Status](https://travis-ci.org/rhysd/vim-clang-format.svg?branch=master)](https://travis-ci.org/rhysd/vim-clang-format)
+[![Build Status](http://82.66.68.210/api/badges/antoinedray/vim-packadd/status.svg)](http://82.66.68.210/antoinedray/vim-packadd)
 
-This python script takes all the pain of installing Vim packages away, one line in the command line is now all it takes !
+Installing Vim packages made simpler
+=======================================
+
+This python script takes all the pain of installing Vim packages away, one simple command in the CLI is now all it takes !
 
 This script is based on the all new Vim8 native third-party package loading.
 
@@ -20,36 +23,61 @@ The following are needed to run the script:
 
 - Vim (version 8+)
 - python3 (need to check if runs on python < 3x)
+- pip
 - git
 
 ## Install Vim-Packadd
 
-Install Vim-Packadd in 3 easy steps !
+Install Vim-Packadd in 1 easy steps !
 
 ```
-$ git clone git@github.com:cloudnodes/vim-packadd.git
-$ cd vim-packadd
-$ pip install .
+pip install vim-packadd --user
+```
+
+**Note:** If you already installed packages without packadd, it is recomended to reinstall them so that packadd work on all packages installed on your system.
+
+### Installing for EPITA students
+First and foremost, you need to make Vim packages persistent on the afs, to do so:\
+Create the vim folder:
+```
+mkdir ~/afs/config/vim && mkdir ~/.vim
+```
+Create symlink between the two folders:
+```
+ln -s ~/.vim ~/afs/.confs/vim
+```
+Then, add the *vim* folder to the install.sh in ~/afs/config/install.sh
+
+As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
+
+```
+git clone https://github.com/cloudnodes/vim-packadd.git
+cd vim-packadd/epita
+./install.sh
 ```
 
 ## Usage
+#### Listing
+```
+packadd list
+```
 #### Installing
 ```
-$ packadd install <url>
+packadd install <url>
 ```
 #### Uninstalling
 ```
-$ packadd uninstall <package-name>
+packadd uninstall <package_name>
 ```
 #### Upgrading
 ```
-$ packadd upgrade
+packadd upgrade
 ```
 ## License
 
     The MIT License (MIT)
 
-    Copyright (c) 2018 cloudnodes
+    Copyright (c) 2018 Antoine Dray "cloudnodes"
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
