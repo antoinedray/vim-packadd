@@ -1,5 +1,5 @@
 # VIM Packadd
-[![Build Status](http://82.66.68.210/api/badges/antoinedray/vim-packadd/status.svg)](http://82.66.68.210/antoinedray/vim-packadd)
+[![Build Status](https://drone.antoinedray.me/api/badges/antoinedray/vim-packadd/status.svg)](https://drone.antoinedray.me/antoinedray/vim-packadd)
 
 Installing Vim packages made simpler
 =======================================
