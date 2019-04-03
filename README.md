@@ -21,9 +21,9 @@ Currently the below commands have been implemented:
 The following are needed to run the script:
 
 - Vim (version 8+)
-- python3 (need to check if runs on python < 3x)
-- pip
-- git
+- Git (1.7.x or newer)
+- Python3 (need to check if runs on python < 3x)
+- Pip
 
 ## Install Vim-Packadd
 
