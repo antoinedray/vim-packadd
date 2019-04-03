@@ -25,8 +25,9 @@ steps:
   - python3 setup.py install --user
 
 - name: lint
-  image: alpine/flake8
+  image: python:latest
   commands:
+  - pip3 install flake8
   - flake8 packadd/
 
 - name: test
