@@ -55,6 +55,15 @@ cd vim-packadd/epita
 ./install.sh
 ```
 
+### Fixing potential *command not found errors*
+
+Python packages often install scripts (executables) as well as Python modules. To get full use of ```--user``` installed packages, you may also want to put the matching executable path onto your system. I do this with the following lines in my ```~/.bashrc``` file:
+
+```
+export PY_USER_BIN=$(python -c 'import site; print(site.USER_BASE + "/bin")')
+export PATH=$PY_USER_BIN:$PATH
+```
+
 ## Usage
 #### Listing
 ```
