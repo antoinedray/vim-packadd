@@ -48,6 +48,7 @@ class p:
 
 class Progress(git.remote.RemoteProgress):
     msg = ''
+
     def update(self, op_code, cur_count, max_count, message):
         rate = (cur_count / max_count * 100, 100)[cur_count == 0]
         pre = (p.PRE_INFO_L, p.PRE_OK_L)[match(message, '^Done')]
