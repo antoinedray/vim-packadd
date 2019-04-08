@@ -3,21 +3,18 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.10"
+__version__ = "0.3.11"
 
 import os
-import sys
 import git
 import re
-
-
-argc = len(sys.argv)
+import argparse
 
 
 class path:
     VIM = os.environ['HOME'] + '/.vim'
-    START = os.environ['HOME'] + '/.vim/pack/packages/start/'
-    OPT = os.environ['HOME'] + '/.vim/pack/packages/opt/'
+    START = os.environ['HOME'] + '/.vim/pack/packadd/start/'
+    OPT = os.environ['HOME'] + '/.vim/pack/packadd/opt/'
 
 
 class c:
@@ -39,11 +36,6 @@ class p:
     PRE_OK = c.OK + c.BOLD + '> ' + c.END
     PRE_OK_L = c.OK + c.BOLD + '==> ' + c.END
     PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
-    INV_USAGE = c.FAIL + 'Error:' + c.END + ' Invalid usage: '
-    USAGE1 = 'Example usage:\n  packadd install [URL]\n  packadd upgrade\n'
-    USAGE2 = '  packadd uninstall [PACKAGE]\n  packadd list'
-    FURTH_HELP = 'Further help:\n  https://github.com/antoinedray/vim-packadd'
-    UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
 
 class Progress(git.remote.RemoteProgress):
@@ -68,10 +60,6 @@ def match(line, regex):
     return 0
 
 
-def help():
-    print(p.USAGE1 + p.USAGE2 + '\n\n' + p.FURTH_HELP)
-
-
 def create_folders():
     if not os.path.isdir(path.START):
         os.makedirs(path.START)
@@ -81,7 +69,7 @@ def create_folders():
 
 def init_repo():
     with open(path.VIM + '.gitignore', 'a') as vim:
-        vim.write('*\n!pack/packages\n')
+        vim.write('*\n!pack/packadd\n')
     repo = git.Repo.init(path.VIM)
     repo.git.submodule('init')
     repo.index.commit('Structure initialised')
@@ -97,7 +85,7 @@ def check_repo():
         init_repo()
 
 
-def listall():
+def listall(args):
     check_repo()
     repo = git.Repo(path.VIM)
     print(p.PRE_INFO + 'Listing...')
@@ -110,7 +98,7 @@ def listall():
         print()
 
 
-def upgrade():
+def upgrade(args):
     check_repo()
     print('\n' + p.PRE_INFO + 'Upgrading all packages...\n')
     repo = git.Repo(path.VIM)
@@ -118,11 +106,8 @@ def upgrade():
     print('\n' + p.PRE_OK + 'Packages are up to date\n')
 
 
-def install():
-    if argc != 3:
-        print(p.INV_USAGE + 'This command requires an url')
-        return
-    url = sys.argv[2]
+def install(args):
+    url = args.url
     if url[-1] == '/':
         url = url[:-1]
     check_repo()
@@ -130,7 +115,10 @@ def install():
     name = os.path.splitext(os.path.basename(url))[0]
     repo = git.Repo(path.VIM)
     try:
-        fpath = path.START + name
+        if '--opt' in args:
+            fpath = path.OPT
+        else:
+            fpath = path.START + name
         repo.create_submodule(name=name, path=fpath, url=url, branch='master')
         repo.index.commit(name + ' installed')
         print(p.PRE_OK + name + ' installed')
@@ -138,11 +126,8 @@ def install():
         print(p.PRE_FAIL + 'Invalid git package url')
 
 
-def uninstall():
-    if argc != 3:
-        print(p.INV_USAGE + 'This command requires a package name')
-        return
-    name = sys.argv[2]
+def uninstall(args):
+    name = args.package
     check_repo()
     print(p.PRE_INFO + 'Uninstalling ' + name + '...')
     repo = git.Repo(path.VIM)
@@ -156,19 +141,22 @@ def uninstall():
 
 
 def main():
-    if len(sys.argv) < 2:
-        help()
-        return
-    cmd = sys.argv[1]
-    if cmd == 'upgrade':
-        upgrade()
-    elif cmd == 'install':
-        install()
-    elif cmd == 'uninstall':
-        uninstall()
-    elif cmd == 'list':
-        listall()
-    elif cmd == 'help' or cmd == '-h':
-        help()
-    else:
-        print(p.UNKNOWN + cmd)
+    parser = argparse.ArgumentParser()
+    sp = parser.add_subparsers()
+
+    pinstall = sp.add_parser('install', help='install package from url')
+    pinstall.add_argument('url')
+    pinstall.set_defaults(func=install)
+
+    plist = sp.add_parser('list', help='list all installed packages')
+    plist.set_defaults(func=listall)
+
+    puninstall = sp.add_parser('uninstall', help='removes selected packages')
+    puninstall.add_argument('package')
+    puninstall.set_defaults(func=uninstall)
+
+    pupgrade = sp.add_parser('upgrade', help='upgrade all packages')
+    pupgrade.set_defaults(func=upgrade)
+
+    args = parser.parse_args()
+    args.func(args)
