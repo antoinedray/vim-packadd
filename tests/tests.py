@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+
+"""tests.tests: provides testing entry point main()."""
+
+
 import argparse
 import unittest
 import os
