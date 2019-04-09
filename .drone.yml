@@ -35,8 +35,7 @@ steps:
   commands:
   - python3 --version
   - pip3 install setuptools
-  - python3 setup.py install --user
-  - test/test.sh
+  - python3 setup.py test
 
 - name: deploy
   image: python:latest
