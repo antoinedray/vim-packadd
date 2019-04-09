@@ -24,18 +24,18 @@ steps:
   - pip3 install setuptools
   - python3 setup.py install --user
 
-- name: lint
-  image: python:latest
-  commands:
-  - pip3 install flake8
-  - flake8 packadd/
-
 - name: test
   image: python:latest
   commands:
   - python3 --version
   - pip3 install setuptools
   - python3 setup.py test
+
+- name: lint
+  image: python:latest
+  commands:
+  - pip3 install flake8
+  - flake8 packadd/ tests/
 
 - name: deploy
   image: python:latest
