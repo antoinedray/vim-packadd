@@ -45,8 +45,12 @@ class TestStringMethods(unittest.TestCase):
     def test_uptodate_upgrade(self):
         args = self.pi.parse_args(['https://github.com/tomasr/molokai.git'])
         install(args)
-        with self.assertRaises(RuntimeError):
+        try:
             upgrade(None)
+            self.
+        except(RuntimeError):
+            self.fail("Error triggered on upgrade")
+
 
 
 def main():
