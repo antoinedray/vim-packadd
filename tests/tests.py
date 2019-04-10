@@ -11,12 +11,7 @@ import sys
 import git
 sys.path.append("..")
 import packadd.packadd as pack
-
-
-class path:
-    VIM = os.environ['HOME'] + '/.vim'
-    START = os.environ['HOME'] + '/.vim/pack/packadd/start/'
-    OPT = os.environ['HOME'] + '/.vim/pack/packadd/opt/'
+import packadd.config as conf
 
 
 class TestStringMethods(unittest.TestCase):
@@ -32,21 +27,22 @@ class TestStringMethods(unittest.TestCase):
     def test_install(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
         pack.install(args)
-        self.assertTrue(os.path.isdir(path.START + '/gruvbox'))
+        self.assertTrue(os.path.isdir(conf.Paths.START + '/gruvbox'))
 
     def test_install_unexisting(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbo.git'])
         pack.install(args)
-        self.assertFalse(os.path.isdir(path.START + '/gruvbo'))
+        self.assertFalse(os.path.isdir(conf.Paths.START + '/gruvbo'))
 
     def test_uninstall(self):
         args = self.puni.parse_args(['gruvbox'])
         pack.uninstall(args)
-        self.assertFalse(os.path.isdir(path.START + '/gruvbox'))
+        self.assertFalse(os.path.isdir(conf.Paths.START + '/gruvbox'))
 
     def test_upgrade(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
-        repo = git.Repo(path.VIM)
+        pack.install(args)
+        repo = git.Repo(conf.Paths.VIM)
         sms = repo.submodules
         if len(sms) < 1:
             self.assertTrue(False)
