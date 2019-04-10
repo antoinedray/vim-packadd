@@ -9,9 +9,8 @@ import unittest
 import os
 import sys
 import git
-sys.path.append("..")
-import packadd.packadd as pack
-import packadd.config as conf
+from .packadd import *
+from .config import *
 
 
 class TestStringMethods(unittest.TestCase):
@@ -46,10 +45,8 @@ class TestStringMethods(unittest.TestCase):
     def test_uptodate_upgrade(self):
         args = self.pi.parse_args(['https://github.com/tomasr/molokai.git'])
         pack.install(args)
-        try:
+        with self.assertRaises(RuntimeError):
             pack.upgrade(None)
-        except ExceptionType:
-            self.fail("Upgrade raised ExceptionType unexpectedly")
 
 
 def main():

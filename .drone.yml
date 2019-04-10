@@ -32,7 +32,7 @@ steps:
   image: python:latest
   commands:
   - pip3 install flake8
-  - flake8 packadd/ tests/
+  - flake8 packadd/
 
 - name: deploy
   image: python:latest
