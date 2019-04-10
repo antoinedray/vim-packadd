@@ -47,7 +47,6 @@ class TestStringMethods(unittest.TestCase):
         install(args)
         try:
             upgrade(None)
-            self.
         except(RuntimeError):
             self.fail("Error triggered on upgrade")
 
