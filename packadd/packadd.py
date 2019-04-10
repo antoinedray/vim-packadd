@@ -3,51 +3,31 @@
 
 """packadd.packadd: provides entry point main()."""
 
-__version__ = "0.3.10"
 
-import os, sys, git, re
+__version__ = "0.4.0"
 
-argc = len(sys.argv)
 
-class path:
-    VIM = os.environ['HOME'] + '/.vim'
-    START = os.environ['HOME'] + '/.vim/pack/packages/start/'
-    OPT = os.environ['HOME'] + '/.vim/pack/packages/opt/'
+import os
+import git
+import re
+import argparse
+from .config import Colors, Paths, Prints
 
-class c:
-    HEADER = '\033[95m'
-    INFO = '\033[94m'
-    OK = '\033[92m'
-    WARN = '\033[93m'
-    FAIL = '\033[31m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    END = '\033[0m'
-
-class p:
-    PRE_INFO = c.INFO + c.BOLD + '> ' + c.END
-    PRE_INFO_L = c.INFO + c.BOLD + '==> ' + c.END
-    PRE_FAIL = c.FAIL + c.BOLD + '> ' + c.END
-    PRE_FAIL_L = c.FAIL + c.BOLD + '==> ' + c.END
-    PRE_OK = c.OK + c.BOLD + '> ' + c.END
-    PRE_OK_L = c.OK + c.BOLD + '==> ' + c.END
-    PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
-    INV_USAGE = c.FAIL + 'Error:' + c.END + ' Invalid usage: '
-    USAGE = 'Example usage:\n  packadd install [URL]\n  packadd upgrade\n  packadd uninstall [PACKAGE]\n  packadd list'
-    FURTH_HELP = 'Further help:\n  https://github.com/antoinedray/vim-packadd'
-    UNKNOWN = c.FAIL + 'Error:' + c.END + ' Unknown command: '
 
 class Progress(git.remote.RemoteProgress):
     msg = ''
+
     def update(self, op_code, cur_count, max_count, message):
         rate = (cur_count / max_count * 100, 100)[cur_count == 0]
-        pre = (p.PRE_INFO_L, p.PRE_OK_L)[match(message, '^Done')]
+        pre = (Prints.PRE_INFO_L, Prints.PRE_OK_L)[match(message, '^Done')]
         if not message:
             message = Progress.msg
-            print(pre + ' ({:.0f}%) {:<65}'.format(rate, message) + ('', '...')[len(message) > 65], end='\r')
+            line = pre + ' ({:.0f}%) {:<65}'.format(rate, message)
+            print(line + ('', '...')[len(message) > 65], end='\r')
         else:
             Progress.msg = message
-            print(pre + ' ({:.0f}%) '.format(rate) +  message)
+            print(pre + ' ({:.0f}%) '.format(rate) + message)
+
 
 def match(line, regex):
     reg = re.compile(regex)
@@ -55,98 +35,104 @@ def match(line, regex):
         return 1
     return 0
 
-def help():
-    print(p.USAGE + '\n\n' + p.FURTH_HELP)
 
-def create_folders():
-    if not os.path.isdir(path.START):
-        os.makedirs(path.START)
-    if not os.path.isdir(path.OPT):
-        os.makedirs(path.OPT)
+def init_folders():
+    if not os.path.isdir(Paths.START):
+        os.makedirs(Paths.START)
+    if not os.path.isdir(Paths.OPT):
+        os.makedirs(Paths.OPT)
+
 
 def init_repo():
-    with open(path.VIM + '.gitignore', 'a') as vim:
-        vim.write('*\n!pack/packages\n')
-    repo = git.Repo.init(path.VIM)
-    sub = repo.git.submodule('init')
+    with open(Paths.VIM + '.gitignore', 'a') as vim:
+        vim.write('*\n!pack/packadd\n')
+    repo = git.Repo.init(Paths.VIM)
+    repo.git.submodule('init')
     repo.index.commit('Structure initialised')
-    print(p.PRE_INFO + 'Packadd initialized')
+    print(Prints.PRE_INFO + 'Packadd initialized')
+
 
 def check_repo():
-    if not os.path.isdir(path.START) or not os.path.isdir(path.OPT):
-       create_folders()
+    if not os.path.isdir(Paths.START) or not os.path.isdir(Paths.OPT):
+        init_folders()
     try:
-        git.Repo(path.VIM)
+        git.Repo(Paths.VIM)
     except git.exc.InvalidGitRepositoryError:
         init_repo()
 
-def listall():
+
+def listall(args):
     check_repo()
-    repo = git.Repo(path.VIM)
-    print(p.PRE_INFO + 'Listing...')
+    repo = git.Repo(Paths.VIM)
+    print(Prints.PRE_INFO + 'Listing...')
     if not repo.submodules:
-        print(p.PRE_INFO + 'No packages installed yet')
+        print(Prints.PRE_INFO + 'No packages installed yet')
     else:
         print()
         for sm in repo.submodules:
-            print(p.PRE_LIST + sm.name)
+            print(Prints.PRE_LIST + sm.name)
         print()
 
-def upgrade():
-    check_repo()
-    print('\n' + p.PRE_INFO + 'Upgrading all packages...\n')
-    repo = git.Repo(path.VIM)
-    repo.submodule_update(init=True, recursive=False, progress=Progress())
-    print('\n' + p.PRE_OK + 'Packages are up to date\n')
 
-def install():
-    if argc != 3:
-        print(p.INV_USAGE + 'This command requires an url')
-        return
-    url = sys.argv[2]
+def upgrade(args):
+    check_repo()
+    print('\n' + Prints.PRE_INFO + 'Upgrading all packages...\n')
+    repo = git.Repo(Paths.VIM)
+    repo.submodule_update(init=True, recursive=False, progress=Progress())
+    print('\n' + Prints.PRE_OK + 'Packages are up to date\n')
+
+
+def install(args):
+    url = args.url
     if url[-1] == '/':
         url = url[:-1]
     check_repo()
-    print(p.PRE_INFO + 'Installing...')
+    print(Prints.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
-    repo = git.Repo(path.VIM)
+    repo = git.Repo(Paths.VIM)
     try:
-        repo.create_submodule(name=name, path=path.START + name, url=url, branch='master')
+        if '--opt' in args:
+            fpath = Paths.OPT
+        else:
+            fpath = Paths.START + name
+        repo.create_submodule(name=name, path=fpath, url=url, branch='master')
         repo.index.commit(name + ' installed')
-        print(p.PRE_OK + name + ' installed')
+        print(Prints.PRE_OK + name + ' installed')
     except git.exc.GitCommandError:
-        print(p.PRE_FAIL + 'Invalid git package url')
+        print(Prints.PRE_FAIL + 'Invalid git package url')
 
-def uninstall():
-    if argc != 3:
-        print(p.INV_USAGE + 'This command requires a package name')
-        return
-    name = sys.argv[2]
+
+def uninstall(args):
+    name = args.package
     check_repo()
-    print(p.PRE_INFO + 'Uninstalling ' + name + '...')
-    repo = git.Repo(path.VIM)
+    print(Prints.PRE_INFO + 'Uninstalling ' + name + '...')
+    repo = git.Repo(Paths.VIM)
     for sm in repo.submodules:
         if sm.name == name:
             sm.remove()
             repo.index.commit(name + ' uninstalled')
-            print(p.PRE_OK + name + ' uninstalled')
+            print(Prints.PRE_OK + name + ' uninstalled')
             return
-    print(c.FAIL + 'Error:' + c.END + ' Unknown package: ' + name)
+    print(Colors.FAIL + 'Error:' + Colors.END + ' Unknown package: ' + name)
+
 
 def main():
-    if len(sys.argv) < 2:
-        help()
-        return
-    cmd = sys.argv[1]
-    if cmd == 'upgrade':
-        upgrade()
-    elif cmd == 'install':
-        install()
-    elif cmd == 'uninstall':
-        uninstall()
-    elif cmd == 'list':
-        listall()
-    elif cmd == 'help' or cmd == '-h':
-        help()
-    else:
-        print(p.UNKNOWN + cmd)
+    parser = argparse.ArgumentParser()
+    sp = parser.add_subparsers()
+
+    pinstall = sp.add_parser('install', help='install package from url')
+    pinstall.add_argument('url')
+    pinstall.set_defaults(func=install)
+
+    plist = sp.add_parser('list', help='list all installed packages')
+    plist.set_defaults(func=listall)
+
+    puninstall = sp.add_parser('uninstall', help='removes selected packages')
+    puninstall.add_argument('package')
+    puninstall.set_defaults(func=uninstall)
+
+    pupgrade = sp.add_parser('upgrade', help='upgrade all packages')
+    pupgrade.set_defaults(func=upgrade)
+
+    args = parser.parse_args()
+    args.func(args)

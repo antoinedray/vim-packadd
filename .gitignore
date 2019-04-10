@@ -1,4 +1,8 @@
+# Python generated
+__pycache__
+
+# setuptools / distutils generated
 dist
 build
-MANIFEST
 *.egg-info
+MANIFEST

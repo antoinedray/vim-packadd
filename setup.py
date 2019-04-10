@@ -33,4 +33,5 @@ setup(
           'gitpython',
       ],
     url = "https://github.com/antoinedray/vim-packadd",
+    test_suite="packadd.tests",
 )
