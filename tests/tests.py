@@ -46,13 +46,18 @@ class TestStringMethods(unittest.TestCase):
 
     def test_upgrade(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
-        repo = git.Repo(path.VIM).submodules[0]
+        repo = git.Repo(path.VIM)
+        sms = repo.submodules
+        if len(sms) < 1:
+            self.assertTrue(False)
+            return
+        sm = sms[0]
         # Reset our working tree 10 commits into the past
-        past_branch = repo.create_head('past_branch', 'HEAD~3')
-        repo.head.reference = past_branch
-        assert not repo.head.is_detached
+        past_branch = sm.create_head('past_branch', 'HEAD~3')
+        sm.head.reference = past_branch
+        assert not sm.head.is_detached
         # reset the index and working tree to match the pointed-to commit
-        repo.head.reset(index=True, working_tree=True)
+        sm.head.reset(index=True, working_tree=True)
         pack.upgrade(args)
 
 

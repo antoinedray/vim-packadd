@@ -10,33 +10,7 @@ import os
 import git
 import re
 import argparse
-
-
-class path:
-    VIM = os.environ['HOME'] + '/.vim'
-    START = os.environ['HOME'] + '/.vim/pack/packadd/start/'
-    OPT = os.environ['HOME'] + '/.vim/pack/packadd/opt/'
-
-
-class c:
-    HEADER = '\033[95m'
-    INFO = '\033[94m'
-    OK = '\033[92m'
-    WARN = '\033[93m'
-    FAIL = '\033[31m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    END = '\033[0m'
-
-
-class p:
-    PRE_INFO = c.INFO + c.BOLD + '> ' + c.END
-    PRE_INFO_L = c.INFO + c.BOLD + '==> ' + c.END
-    PRE_FAIL = c.FAIL + c.BOLD + '> ' + c.END
-    PRE_FAIL_L = c.FAIL + c.BOLD + '==> ' + c.END
-    PRE_OK = c.OK + c.BOLD + '> ' + c.END
-    PRE_OK_L = c.OK + c.BOLD + '==> ' + c.END
-    PRE_LIST = c.INFO + c.BOLD + '  - ' + c.END
+import config
 
 
 class Progress(git.remote.RemoteProgress):
@@ -44,7 +18,7 @@ class Progress(git.remote.RemoteProgress):
 
     def update(self, op_code, cur_count, max_count, message):
         rate = (cur_count / max_count * 100, 100)[cur_count == 0]
-        pre = (p.PRE_INFO_L, p.PRE_OK_L)[match(message, '^Done')]
+        pre = (prints.PRE_INFO_L, prints.PRE_OK_L)[match(message, '^Done')]
         if not message:
             message = Progress.msg
             line = pre + ' ({:.0f}%) {:<65}'.format(rate, message)
@@ -74,7 +48,7 @@ def init_repo():
     repo = git.Repo.init(path.VIM)
     repo.git.submodule('init')
     repo.index.commit('Structure initialised')
-    print(p.PRE_INFO + 'Packadd initialized')
+    print(prints.PRE_INFO + 'Packadd initialized')
 
 
 def check_repo():
@@ -89,22 +63,22 @@ def check_repo():
 def listall(args):
     check_repo()
     repo = git.Repo(path.VIM)
-    print(p.PRE_INFO + 'Listing...')
+    print(prints.PRE_INFO + 'Listing...')
     if not repo.submodules:
-        print(p.PRE_INFO + 'No packages installed yet')
+        print(prints.PRE_INFO + 'No packages installed yet')
     else:
         print()
         for sm in repo.submodules:
-            print(p.PRE_LIST + sm.name)
+            print(prints.PRE_LIST + sm.name)
         print()
 
 
 def upgrade(args):
     check_repo()
-    print('\n' + p.PRE_INFO + 'Upgrading all packages...\n')
+    print('\n' + prints.PRE_INFO + 'Upgrading all packages...\n')
     repo = git.Repo(path.VIM)
     repo.submodule_update(init=True, recursive=False, progress=Progress())
-    print('\n' + p.PRE_OK + 'Packages are up to date\n')
+    print('\n' + prints.PRE_OK + 'Packages are up to date\n')
 
 
 def install(args):
@@ -112,7 +86,7 @@ def install(args):
     if url[-1] == '/':
         url = url[:-1]
     check_repo()
-    print(p.PRE_INFO + 'Installing...')
+    print(prints.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
     repo = git.Repo(path.VIM)
     try:
@@ -122,23 +96,23 @@ def install(args):
             fpath = path.START + name
         repo.create_submodule(name=name, path=fpath, url=url, branch='master')
         repo.index.commit(name + ' installed')
-        print(p.PRE_OK + name + ' installed')
+        print(prints.PRE_OK + name + ' installed')
     except git.exc.GitCommandError:
-        print(p.PRE_FAIL + 'Invalid git package url')
+        print(prints.PRE_FAIL + 'Invalid git package url')
 
 
 def uninstall(args):
     name = args.package
     check_repo()
-    print(p.PRE_INFO + 'Uninstalling ' + name + '...')
+    print(prints.PRE_INFO + 'Uninstalling ' + name + '...')
     repo = git.Repo(path.VIM)
     for sm in repo.submodules:
         if sm.name == name:
             sm.remove()
             repo.index.commit(name + ' uninstalled')
-            print(p.PRE_OK + name + ' uninstalled')
+            print(prints.PRE_OK + name + ' uninstalled')
             return
-    print(c.FAIL + 'Error:' + c.END + ' Unknown package: ' + name)
+    print(colors.FAIL + 'Error:' + colors.END + ' Unknown package: ' + name)
 
 
 def main():
