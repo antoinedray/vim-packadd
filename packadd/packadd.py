@@ -4,7 +4,7 @@
 """packadd.packadd: provides entry point main()."""
 
 
-__version__ = "0.3.11"
+__version__ = "0.4.0"
 
 
 import os
@@ -36,7 +36,7 @@ def match(line, regex):
     return 0
 
 
-def create_folders():
+def init_folders():
     if not os.path.isdir(Paths.START):
         os.makedirs(Paths.START)
     if not os.path.isdir(Paths.OPT):
@@ -54,7 +54,7 @@ def init_repo():
 
 def check_repo():
     if not os.path.isdir(Paths.START) or not os.path.isdir(Paths.OPT):
-        create_folders()
+        init_folders()
     try:
         git.Repo(Paths.VIM)
     except git.exc.InvalidGitRepositoryError:
