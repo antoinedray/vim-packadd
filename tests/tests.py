@@ -43,23 +43,13 @@ class TestStringMethods(unittest.TestCase):
         pack.uninstall(args)
         self.assertFalse(os.path.isdir(conf.Paths.START + '/gruvbox'))
 
-    def test_upgrade(self):
-        args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
+    def test_uptodate_upgrade(self):
+        args = self.pi.parse_args(['https://github.com/tomasr/molokai.git'])
         pack.install(args)
-        repo = git.Repo(conf.Paths.VIM)
-        sms = repo.submodules
-        if len(sms) < 1:
-            self.assertTrue(False)
-            return
-        sm = sms[0]
-        # Reset our working tree 3 commits into the past
-        sm.revert("28205e2497ecf474a4c41d19f2f7cc9543d061f7", no_edit = True)
-        #past_branch = sm.create_head('past_branch', 'HEAD~3')
-        #sm.head.reference = past_branch
-        #assert not sm.head.is_detached
-        # reset the index and working tree to match the pointed-to commit
-        sm.head.reset(index=True, working_tree=True)
-        pack.upgrade(args)
+        try:
+            pack.upgrade(None)
+        except ExceptionType:
+            self.fail("Upgrade raised ExceptionType unexpectedly")
 
 
 def main():
