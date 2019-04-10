@@ -10,7 +10,7 @@ import os
 import sys
 import git
 from .packadd import *
-from .config import *
+from .config import Paths
 
 
 class TestStringMethods(unittest.TestCase):
@@ -24,29 +24,29 @@ class TestStringMethods(unittest.TestCase):
         self.plist = self.subparser.add_parser('list')
 
     def test_init_repo(self):
-        pack.init_repo()
-        self.assertTrue(os.path.isdir(conf.Paths.VIM))
+        init_repo()
+        self.assertTrue(os.path.isdir(Paths.VIM))
 
     def test_install(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
-        pack.install(args)
-        self.assertTrue(os.path.isdir(conf.Paths.START + '/gruvbox'))
+        install(args)
+        self.assertTrue(os.path.isdir(Paths.START + '/gruvbox'))
 
     def test_install_unexisting(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbo.git'])
-        pack.install(args)
-        self.assertFalse(os.path.isdir(conf.Paths.START + '/gruvbo'))
+        install(args)
+        self.assertFalse(os.path.isdir(Paths.START + '/gruvbo'))
 
     def test_uninstall(self):
         args = self.puni.parse_args(['gruvbox'])
-        pack.uninstall(args)
-        self.assertFalse(os.path.isdir(conf.Paths.START + '/gruvbox'))
+        .uninstall(args)
+        self.assertFalse(os.path.isdir(Paths.START + '/gruvbox'))
 
     def test_uptodate_upgrade(self):
         args = self.pi.parse_args(['https://github.com/tomasr/molokai.git'])
-        pack.install(args)
+        install(args)
         with self.assertRaises(RuntimeError):
-            pack.upgrade(None)
+            upgrade(None)
 
 
 def main():
