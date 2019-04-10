@@ -48,10 +48,11 @@ class TestStringMethods(unittest.TestCase):
             self.assertTrue(False)
             return
         sm = sms[0]
-        # Reset our working tree 10 commits into the past
-        past_branch = sm.create_head('past_branch', 'HEAD~3')
-        sm.head.reference = past_branch
-        assert not sm.head.is_detached
+        # Reset our working tree 3 commits into the past
+        sm.git.revert("28205e2497ecf474a4c41d19f2f7cc9543d061f7", no_edit = True)
+        #past_branch = sm.create_head('past_branch', 'HEAD~3')
+        #sm.head.reference = past_branch
+        #assert not sm.head.is_detached
         # reset the index and working tree to match the pointed-to commit
         sm.head.reset(index=True, working_tree=True)
         pack.upgrade(args)
