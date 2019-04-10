@@ -10,7 +10,7 @@ import os
 import git
 import re
 import argparse
-import config
+from .config import Colors, Paths, Prints
 
 
 class Progress(git.remote.RemoteProgress):
@@ -18,7 +18,7 @@ class Progress(git.remote.RemoteProgress):
 
     def update(self, op_code, cur_count, max_count, message):
         rate = (cur_count / max_count * 100, 100)[cur_count == 0]
-        pre = (prints.PRE_INFO_L, prints.PRE_OK_L)[match(message, '^Done')]
+        pre = (Prints.PRE_INFO_L, Prints.PRE_OK_L)[match(message, '^Done')]
         if not message:
             message = Progress.msg
             line = pre + ' ({:.0f}%) {:<65}'.format(rate, message)
@@ -36,49 +36,49 @@ def match(line, regex):
 
 
 def create_folders():
-    if not os.path.isdir(path.START):
-        os.makedirs(path.START)
-    if not os.path.isdir(path.OPT):
-        os.makedirs(path.OPT)
+    if not os.path.isdir(Paths.START):
+        os.makedirs(Paths.START)
+    if not os.path.isdir(Paths.OPT):
+        os.makedirs(Paths.OPT)
 
 
 def init_repo():
-    with open(path.VIM + '.gitignore', 'a') as vim:
+    with open(Paths.VIM + '.gitignore', 'a') as vim:
         vim.write('*\n!pack/packadd\n')
-    repo = git.Repo.init(path.VIM)
+    repo = git.Repo.init(Paths.VIM)
     repo.git.submodule('init')
     repo.index.commit('Structure initialised')
-    print(prints.PRE_INFO + 'Packadd initialized')
+    print(Prints.PRE_INFO + 'Packadd initialized')
 
 
 def check_repo():
-    if not os.path.isdir(path.START) or not os.path.isdir(path.OPT):
+    if not os.path.isdir(Paths.START) or not os.path.isdir(Paths.OPT):
         create_folders()
     try:
-        git.Repo(path.VIM)
+        git.Repo(Paths.VIM)
     except git.exc.InvalidGitRepositoryError:
         init_repo()
 
 
 def listall(args):
     check_repo()
-    repo = git.Repo(path.VIM)
-    print(prints.PRE_INFO + 'Listing...')
+    repo = git.Repo(Paths.VIM)
+    print(Prints.PRE_INFO + 'Listing...')
     if not repo.submodules:
-        print(prints.PRE_INFO + 'No packages installed yet')
+        print(Prints.PRE_INFO + 'No packages installed yet')
     else:
         print()
         for sm in repo.submodules:
-            print(prints.PRE_LIST + sm.name)
+            print(Prints.PRE_LIST + sm.name)
         print()
 
 
 def upgrade(args):
     check_repo()
-    print('\n' + prints.PRE_INFO + 'Upgrading all packages...\n')
-    repo = git.Repo(path.VIM)
+    print('\n' + Prints.PRE_INFO + 'Upgrading all packages...\n')
+    repo = git.Repo(Paths.VIM)
     repo.submodule_update(init=True, recursive=False, progress=Progress())
-    print('\n' + prints.PRE_OK + 'Packages are up to date\n')
+    print('\n' + Prints.PRE_OK + 'Packages are up to date\n')
 
 
 def install(args):
@@ -86,33 +86,33 @@ def install(args):
     if url[-1] == '/':
         url = url[:-1]
     check_repo()
-    print(prints.PRE_INFO + 'Installing...')
+    print(Prints.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
-    repo = git.Repo(path.VIM)
+    repo = git.Repo(Paths.VIM)
     try:
         if '--opt' in args:
-            fpath = path.OPT
+            fpath = Paths.OPT
         else:
-            fpath = path.START + name
+            fpath = Paths.START + name
         repo.create_submodule(name=name, path=fpath, url=url, branch='master')
         repo.index.commit(name + ' installed')
-        print(prints.PRE_OK + name + ' installed')
+        print(Prints.PRE_OK + name + ' installed')
     except git.exc.GitCommandError:
-        print(prints.PRE_FAIL + 'Invalid git package url')
+        print(Prints.PRE_FAIL + 'Invalid git package url')
 
 
 def uninstall(args):
     name = args.package
     check_repo()
-    print(prints.PRE_INFO + 'Uninstalling ' + name + '...')
-    repo = git.Repo(path.VIM)
+    print(Prints.PRE_INFO + 'Uninstalling ' + name + '...')
+    repo = git.Repo(Paths.VIM)
     for sm in repo.submodules:
         if sm.name == name:
             sm.remove()
             repo.index.commit(name + ' uninstalled')
-            print(prints.PRE_OK + name + ' uninstalled')
+            print(Prints.PRE_OK + name + ' uninstalled')
             return
-    print(colors.FAIL + 'Error:' + colors.END + ' Unknown package: ' + name)
+    print(Colors.FAIL + 'Error:' + Colors.END + ' Unknown package: ' + name)
 
 
 def main():
