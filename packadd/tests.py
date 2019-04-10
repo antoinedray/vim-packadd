@@ -4,12 +4,10 @@
 """tests.tests: provides testing entry point main()."""
 
 
+import os
 import argparse
 import unittest
-import os
-import sys
-import git
-from .packadd import *
+from .packadd import init_repo, install, uninstall, upgrade
 from .config import Paths
 
 
@@ -49,7 +47,6 @@ class TestStringMethods(unittest.TestCase):
             upgrade(None)
         except(RuntimeError):
             self.fail("Error triggered on upgrade")
-
 
 
 def main():
