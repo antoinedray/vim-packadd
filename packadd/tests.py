@@ -39,7 +39,7 @@ class TestStringMethods(unittest.TestCase):
 
     def test_uninstall(self):
         args = self.puni.parse_args(['gruvbox'])
-        .uninstall(args)
+        uninstall(args)
         self.assertFalse(os.path.isdir(Paths.START + '/gruvbox'))
 
     def test_uptodate_upgrade(self):
