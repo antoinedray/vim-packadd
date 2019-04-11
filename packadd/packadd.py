@@ -37,6 +37,8 @@ def match(line, regex):
 
 
 def init_folders():
+    if not os.path.isdir(Paths.VIM):
+        os.makedirs(Paths.VIM)
     if not os.path.isdir(Paths.START):
         os.makedirs(Paths.START)
     if not os.path.isdir(Paths.OPT):
@@ -53,7 +55,11 @@ def init_repo():
 
 
 def check_repo():
-    if not os.path.isdir(Paths.START) or not os.path.isdir(Paths.OPT):
+    if not os.path.isdir(Paths.VIM):
+        init_folders()
+    if not os.path.isdir(Paths.START):
+        init_folders()
+    if not os.path.isdir(Paths.OPT):
         init_folders()
     try:
         git.Repo(Paths.VIM)
@@ -78,7 +84,7 @@ def upgrade(args):
     check_repo()
     print('\n' + Prints.PRE_INFO + 'Upgrading all packages...\n')
     repo = git.Repo(Paths.VIM)
-    repo.submodule_update(init=True, recursive=False, progress=Progress())
+    repo.submodule_update(init=True, recursive=True, progress=Progress())
     print('\n' + Prints.PRE_OK + 'Packages are up to date\n')
 
 
@@ -117,7 +123,10 @@ def uninstall(args):
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.set_defaults(func=lambda x: parser.print_usage())
     sp = parser.add_subparsers()
 
     pinstall = sp.add_parser('install', help='install package from url')

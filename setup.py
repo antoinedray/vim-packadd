@@ -18,6 +18,10 @@ version = re.search(
     ).group(1)
 
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+
 setup(
     name = "vim-packadd",
     packages = ["packadd"],
@@ -25,9 +29,11 @@ setup(
         "console_scripts": ['packadd = packadd.packadd:main']
         },
     version = version,
-    description = "Package manager for Vim8.",
     author = "Antoine Dray",
     author_email = "antoine.dray@epita.fr",
+    description = "Package manager for Vim8.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     license='MIT',
     install_requires=[
           'gitpython',
