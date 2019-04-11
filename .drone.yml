@@ -23,7 +23,6 @@ steps:
 - name: test
   image: python:latest
   commands:
-  - python3 setup.py install --user
   - python3 setup.py test
 
 - name: lint

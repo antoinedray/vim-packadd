@@ -28,17 +28,17 @@ class TestStringMethods(unittest.TestCase):
         self.assertTrue(os.path.isdir(Paths.VIM))
 
     def test_no_args(self):
-        cmd = sh.split('packadd')
+        cmd = sh.split('python3 packadd-runner.py')
         out = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
         self.assertEqual(out.returncode, 0)
 
     def test_invalid_arg(self):
-        cmd = sh.split('packadd unknown')
+        cmd = sh.split('python3 packadd-runner.py unknown')
         out = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
         self.assertEqual(out.returncode, 0)
 
     def test_invalid_args(self):
-        cmd = sh.split('packadd unknown -h')
+        cmd = sh.split('python3 packadd-runner.py unknown -h')
         out = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
         self.assertEqual(out.returncode, 0)
 
