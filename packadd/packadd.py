@@ -117,7 +117,10 @@ def uninstall(args):
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.set_defaults(func=lambda x: parser.print_usage())
     sp = parser.add_subparsers()
 
     pinstall = sp.add_parser('install', help='install package from url')
