@@ -1,6 +1,5 @@
-Installing Vim packages has never been simpler
-=======================================
-[![Build Status](http://82.66.68.210/api/badges/antoinedray/vim-packadd/status.svg)](http://82.66.68.210/antoinedray/vim-packadd)
+# VIM Packadd
+[![Build Status](https://drone.antoinedray.me/api/badges/antoinedray/vim-packadd/status.svg)](https://drone.antoinedray.me/antoinedray/vim-packadd)
 
 Installing Vim packages made simpler
 =======================================
@@ -22,9 +21,9 @@ Currently the below commands have been implemented:
 The following are needed to run the script:
 
 - Vim (version 8+)
-- python3 (need to check if runs on python < 3x)
-- pip
-- git
+- Git (1.7.x or newer)
+- Python3 (need to check if runs on python < 3x)
+- Pip
 
 ## Install Vim-Packadd
 
@@ -56,6 +55,15 @@ cd vim-packadd/epita
 ./install.sh
 ```
 
+### Fixing potential *command not found errors*
+
+Python packages often install scripts (executables) as well as Python modules. To get full use of ```--user``` installed packages, you may also want to put the matching executable path onto your system. I do this with the following lines in my ```~/.bashrc``` file:
+
+```
+export PY_USER_BIN=$(python -c 'import site; print(site.USER_BASE + "/bin")')
+export PATH=$PY_USER_BIN:$PATH
+```
+
 ## Usage
 #### Listing
 ```
@@ -77,7 +85,7 @@ packadd upgrade
 
     The MIT License (MIT)
 
-    Copyright (c) 2018 Antoine Dray "cloudnodes"
+    Copyright (c) 2018 Antoine Dray "antoinedray"
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
