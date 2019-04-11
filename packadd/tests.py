@@ -7,8 +7,6 @@
 import os
 import argparse
 import unittest
-import shlex as sh
-import subprocess as sp
 from .packadd import init_repo, install, uninstall, upgrade
 from .config import Paths
 
@@ -26,27 +24,6 @@ class TestStringMethods(unittest.TestCase):
     def test_init_repo(self):
         init_repo()
         self.assertTrue(os.path.isdir(Paths.VIM))
-
-    def test_no_args(self):
-        cmd = sh.split('python3 packadd-runner.py')
-        child = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
-        child.communicate()[0]
-        self.assertEqual(child.returncode, 0)
-
-    def test_invalid_arg(self):
-        cmd = sh.split('python3 packadd-runner.py unknown')
-        child = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
-        child.communicate()[0]
-        self.assertEqual(child.returncode, 0)
-
-    def test_invalid_args(self):
-        cmd = sh.split('python3 packadd-runner.py unknown -h')
-        child = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
-        child.communicate()[0]
-        self.assertEqual(child.returncode, 0)
-
-    def test_undefined_command(self):
-        args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
 
     def test_install(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
