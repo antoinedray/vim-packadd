@@ -37,6 +37,8 @@ def match(line, regex):
 
 
 def init_folders():
+    if not os.path.isdir(Paths.VIM):
+        os.makedirs(Paths.VIM)
     if not os.path.isdir(Paths.START):
         os.makedirs(Paths.START)
     if not os.path.isdir(Paths.OPT):
@@ -53,7 +55,11 @@ def init_repo():
 
 
 def check_repo():
-    if not os.path.isdir(Paths.START) or not os.path.isdir(Paths.OPT):
+    if not os.path.isdir(Paths.VIM):
+        init_folders()
+    if not os.path.isdir(Paths.START):
+        init_folders()
+    if not os.path.isdir(Paths.OPT):
         init_folders()
     try:
         git.Repo(Paths.VIM)
