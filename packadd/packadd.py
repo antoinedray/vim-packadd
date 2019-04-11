@@ -84,7 +84,7 @@ def upgrade(args):
     check_repo()
     print('\n' + Prints.PRE_INFO + 'Upgrading all packages...\n')
     repo = git.Repo(Paths.VIM)
-    repo.submodule_update(init=True, recursive=False, progress=Progress())
+    repo.submodule_update(init=True, recursive=True, progress=Progress())
     print('\n' + Prints.PRE_OK + 'Packages are up to date\n')
 
 
