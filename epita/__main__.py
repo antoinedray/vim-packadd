@@ -7,4 +7,4 @@
 from .install import main
 
 
-main()
+main(False)

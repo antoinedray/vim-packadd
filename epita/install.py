@@ -5,7 +5,6 @@
 
 
 import os
-import sys
 import shutil
 import subprocess
 from .config import Colors, Paths, Aliases
@@ -34,16 +33,16 @@ def patchInstalled():
     return False
 
 
-def setAlias():
+def setAlias(auto):
     print('Please add the following line to your bashrc:\n\n')
     print(Aliases.LINKSCRIPT + '\n')
-    if '-y' in sys.argv or input("\nAdd it automatically ? (y/N) ") == 'y':
+    if auto or input("\nAdd it automatically ? (y/N) ") == 'y':
         with open(Paths.BASHRC, 'a') as f:
             f.write(Aliases.FULL)
         subprocess.call('source ' + Aliases.BASHRC, shell=True)
 
 
-def main():
+def main(auto):
 
     # Check if patch already installed
     if patchInstalled():
@@ -52,5 +51,5 @@ def main():
     initFolders()
     moveFile('epita/packadd-fix.sh', Paths.PATCH)
     setPermissions(Paths.PATCH)
-    setAlias()
+    setAlias(auto)
     # FIXME: add the proposition of updating install.sh to get perm install
