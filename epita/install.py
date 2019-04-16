@@ -39,7 +39,7 @@ def setAlias(auto):
     if auto or input("\nAdd it automatically ? (y/N) ") == 'y':
         with open(Paths.BASHRC, 'a') as f:
             f.write(Aliases.FULL)
-        subprocess.call('source ' + Aliases.BASHRC, shell=True)
+        subprocess.call('source ' + Paths.BASHRC, shell=True)
 
 
 def main(auto):
