@@ -36,7 +36,7 @@ def match(line, regex):
     return 0
 
 
-def init_folders():
+def initFolders():
     if not os.path.isdir(Paths.VIM):
         os.makedirs(Paths.VIM)
     if not os.path.isdir(Paths.START):
@@ -45,7 +45,7 @@ def init_folders():
         os.makedirs(Paths.OPT)
 
 
-def init_repo():
+def initRepo():
     with open(Paths.VIM + '.gitignore', 'a') as vim:
         vim.write('*\n!pack/packadd\n')
     repo = git.Repo.init(Paths.VIM)
@@ -54,21 +54,21 @@ def init_repo():
     print(Prints.PRE_INFO + 'Packadd initialized')
 
 
-def check_repo():
+def checkRepo():
     if not os.path.isdir(Paths.VIM):
-        init_folders()
+        initFolders()
     if not os.path.isdir(Paths.START):
-        init_folders()
+        initFolders()
     if not os.path.isdir(Paths.OPT):
-        init_folders()
+        initFolders()
     try:
         git.Repo(Paths.VIM)
     except git.exc.InvalidGitRepositoryError:
-        init_repo()
+        initRepo()
 
 
-def listall(args):
-    check_repo()
+def listAll(args):
+    checkRepo()
     repo = git.Repo(Paths.VIM)
     print(Prints.PRE_INFO + 'Listing...')
     if not repo.submodules:
@@ -81,7 +81,7 @@ def listall(args):
 
 
 def upgrade(args):
-    check_repo()
+    checkRepo()
     print('\n' + Prints.PRE_INFO + 'Upgrading all packages...\n')
     repo = git.Repo(Paths.VIM)
     repo.submodule_update(init=True, recursive=True, progress=Progress())
@@ -92,7 +92,7 @@ def install(args):
     url = args.url
     if url[-1] == '/':
         url = url[:-1]
-    check_repo()
+    checkRepo()
     print(Prints.PRE_INFO + 'Installing...')
     name = os.path.splitext(os.path.basename(url))[0]
     repo = git.Repo(Paths.VIM)
@@ -110,7 +110,7 @@ def install(args):
 
 def uninstall(args):
     name = args.package
-    check_repo()
+    checkRepo()
     print(Prints.PRE_INFO + 'Uninstalling ' + name + '...')
     repo = git.Repo(Paths.VIM)
     for sm in repo.submodules:
@@ -134,7 +134,7 @@ def main():
     pinstall.set_defaults(func=install)
 
     plist = sp.add_parser('list', help='list all installed packages')
-    plist.set_defaults(func=listall)
+    plist.set_defaults(func=listAll)
 
     puninstall = sp.add_parser('uninstall', help='removes selected packages')
     puninstall.add_argument('package')
