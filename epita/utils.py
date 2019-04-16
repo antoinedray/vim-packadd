@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-"""epita.install: provides packadd install script."""
+"""epita.install: provides installation utility functions."""
 
 
 import os

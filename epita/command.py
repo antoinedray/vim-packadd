@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-"""epita.command: executed when epita installation is asked."""
+"""epita.command: defines the epita installation."""
 
 
 from setuptools import Command
@@ -13,7 +13,7 @@ class epita_install(Command):
     description = 'installation for epita pie'
 
     user_options = [
-        ('automate', 'a', 'fully automate installation')
+        ('auto', 'a', 'fully automate installation')
     ]
 
     def initialize_options(self):
