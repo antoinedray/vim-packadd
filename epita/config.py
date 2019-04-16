@@ -21,7 +21,7 @@ class Colors:
 
 class Paths:
     BASHFILE = ('.bash_profile', '.bashrc')[platform.system() == 'Linux']
-    BASHRC = os.environ['HOME'] + BASHFILE
+    BASHRC = os.environ['HOME'] + '/' + BASHFILE
     PATCH = os.environ['HOME'] + '/afs/.pip/packadd-fix.sh'
     PIP = os.environ['HOME'] + '/afs/.pip'
     VIM = os.environ['HOME'] + '/.vim'

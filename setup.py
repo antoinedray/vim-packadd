@@ -26,10 +26,10 @@ setup(
     name = "vim-packadd",
     packages = ["packadd"],
     entry_points = {
-        'console_scripts': ['packadd = packadd.packadd:main'],
         'distutils.commands': [
             'epita_install = epita.command:epita_install',
-        ]
+        ],
+        'console_scripts': ['packadd = packadd.packadd:main'],
     },
     version = version,
     author = "Antoine Dray",
