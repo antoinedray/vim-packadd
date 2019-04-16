@@ -50,7 +50,7 @@ def main():
         return 0
 
     initFolders()
-    moveFile('packadd-fix.sh', Paths.PATCH)
+    moveFile('epita/packadd-fix.sh', Paths.PATCH)
     setPermissions(Paths.PATCH)
     setAlias()
     # FIXME: add the proposition of updating install.sh to get perm install
