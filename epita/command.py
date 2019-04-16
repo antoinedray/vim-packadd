@@ -12,5 +12,13 @@ class epita_install(Command):
 
     description = 'installation for epita pie'
 
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
     def run(self):
         main()
