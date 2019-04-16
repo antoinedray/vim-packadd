@@ -20,6 +20,11 @@ steps:
   commands:
   - python3 setup.py install --user
 
+- name: epitaInstall
+  image: python:latest
+  commands:
+  - python3 setup.py epita_install
+
 - name: test
   image: python:latest
   commands:
@@ -29,7 +34,7 @@ steps:
   image: python:latest
   commands:
   - pip3 install flake8
-  - flake8 packadd/
+  - flake8 packadd/ epita/
 
 - name: deploy
   image: python:latest

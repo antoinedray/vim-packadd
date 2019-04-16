@@ -5,6 +5,7 @@
 
 
 import os
+import platform
 
 
 class Colors:
@@ -19,6 +20,8 @@ class Colors:
 
 
 class Paths:
+    BASHFILE = ('.bash_profile', '.bashrc')[platform.system() == 'Linux']
+    BASHRC = os.environ['HOME'] + BASHFILE
     PATCH = os.environ['HOME'] + '/afs/.pip/packadd-fix.sh'
     PIP = os.environ['HOME'] + '/afs/.pip'
     VIM = os.environ['HOME'] + '/.vim'
@@ -26,11 +29,7 @@ class Paths:
     OPT = os.environ['HOME'] + '/.vim/pack/packadd/opt/'
 
 
-class Prints:
-    PRE_INFO = Colors.INFO + Colors.BOLD + '> ' + Colors.END
-    PRE_INFO_L = Colors.INFO + Colors.BOLD + '==> ' + Colors.END
-    PRE_FAIL = Colors.FAIL + Colors.BOLD + '> ' + Colors.END
-    PRE_FAIL_L = Colors.FAIL + Colors.BOLD + '==> ' + Colors.END
-    PRE_OK = Colors.OK + Colors.BOLD + '> ' + Colors.END
-    PRE_OK_L = Colors.OK + Colors.BOLD + '==> ' + Colors.END
-    PRE_LIST = Colors.INFO + Colors.BOLD + '  - ' + Colors.END
+class Aliases:
+    COMMENT = '\n# Setup for Vim Packadd, do not remove\n'
+    LINKSCRIPT = "alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'"
+    FULL = COMMENT + PACK

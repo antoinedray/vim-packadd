@@ -5,7 +5,27 @@
 
 
 import os
+import sys
+import shutil
+import subprocess
 from .config import Colors, Paths, Prints
+
+
+def initFolders():
+    if not os.path.isdir(Paths.PIP):
+        os.makedirs(Paths.PIP)
+        print('Permanent pip folder created at ~/afs/.pip')
+    else:
+        print('Permanent pip folder already created at ~/afs/.pip')
+
+
+def moveFile(src, dst):
+    shutil.copyfile(src, dst, follow_symlinks=True)
+
+
+def setPermissions(path):
+    os.chmod(path, 0555)
+
 
 def patchInstalled():
     if os.path.isfile(Paths.PATCH):
@@ -14,7 +34,23 @@ def patchInstalled():
     return False
 
 
-def initFolders():
-    if not os.path.isdir(Paths.PIP):
-        os.makedirs(Paths.PIP)
-        print('Permanent folder created at ~/afs/.pip')
+def setAlias():
+    print('Please add the following line to your bashrc:\n\n')
+    print(Aliases.LINKSCRIPT + '\n')
+    if '-y' in sys.argv or input("\nAdd it automatically ? (y/N) ") == 'y':
+        with open(Paths.BASHRC, 'a') as f:
+            f.write(Aliases.FULL)
+        subprocess.call('source ' + Aliases.BASHRC, shell=True)
+
+
+def main():
+
+    # Check if patch already installed
+    if patchInstalled():
+        return 0
+
+    initFolders()
+    moveFile('packadd-fix.sh', Paths.PATCH)
+    setPermissions(Paths.PATCH)
+    setAlias()
+    # FIXME: add the proposition of updating install.sh to get perm install
