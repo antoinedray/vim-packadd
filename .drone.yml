@@ -23,7 +23,7 @@ steps:
 - name: epita install
   image: python:latest
   commands:
-  - python3 setup.py epita_install
+  - python3 setup.py epita_install -y
 
 - name: test
   image: python:latest
