@@ -24,7 +24,7 @@ def moveFile(src, dst):
 
 
 def setPermissions(path):
-    os.chmod(path, 00555)
+    os.chmod(path, 0o555)
 
 
 def patchInstalled():
