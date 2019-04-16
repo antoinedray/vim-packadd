@@ -19,11 +19,13 @@ steps:
   image: python:latest
   commands:
   - python3 setup.py install --user
+  - packadd --version
 
 - name: epita install
   image: python:latest
   commands:
   - python3 setup.py epita_install -a
+  - packadd --version
 
 - name: test
   image: python:latest

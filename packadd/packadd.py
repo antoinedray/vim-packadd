@@ -67,6 +67,10 @@ def checkRepo():
         initRepo()
 
 
+def version(args):
+    print('Packadd v' + __version__)
+
+
 def listAll(args):
     checkRepo()
     repo = git.Repo(Paths.VIM)
@@ -127,6 +131,8 @@ def main():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.set_defaults(func=lambda x: parser.print_usage())
+    parser.add_argument('-v', '--version', action='version',
+        version='Packadd ' + __version__, help='print version information')
     sp = parser.add_subparsers()
 
     pinstall = sp.add_parser('install', help='install package from url')
