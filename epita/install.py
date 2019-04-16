@@ -8,7 +8,7 @@ import os
 import sys
 import shutil
 import subprocess
-from .config import Colors, Paths, Prints
+from .config import Colors, Paths, Aliases
 
 
 def initFolders():
