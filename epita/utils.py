@@ -22,7 +22,7 @@ def moveFile(src, dst):
     shutil.copyfile(src, dst, follow_symlinks=True)
 
 
-def setPermissions(path):
+def setPerms(path):
     os.chmod(path, 0o555)
 
 
@@ -40,16 +40,3 @@ def setAlias(auto):
         with open(Paths.BASHRC, 'a') as f:
             f.write(Aliases.FULL)
         subprocess.call('source ' + Paths.BASHRC, shell=True)
-
-
-def main(auto):
-
-    # Check if patch already installed
-    if patchInstalled():
-        return 0
-
-    initFolders()
-    moveFile('epita/packadd-fix.sh', Paths.PATCH)
-    setPermissions(Paths.PATCH)
-    setAlias(auto)
-    # FIXME: add the proposition of updating install.sh to get perm install

@@ -5,7 +5,7 @@
 
 
 from setuptools import Command
-from .install import main
+from .utils import *
 
 
 class epita_install(Command):
@@ -23,4 +23,11 @@ class epita_install(Command):
         pass
 
     def run(self):
-        main(self.automate is not None)
+        # Check if patch already installed
+        if patchInstalled():
+            return 0
+        initFolders()
+        moveFile('epita/packadd-fix.sh', Paths.PATCH)
+        setPerms(Paths.PATCH)
+        setAlias(self.automate is not None)
+        # FIXME: add the proposition of updating install.sh to get perm install
