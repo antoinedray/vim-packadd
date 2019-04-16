@@ -7,7 +7,7 @@
 import os
 import shutil
 import subprocess
-from .config import Colors, Paths, Aliases
+from .config import Paths, Aliases
 
 
 def initFolders():
@@ -28,14 +28,14 @@ def setPermissions(path):
 
 def patchInstalled():
     if os.path.isfile(Paths.PATCH):
-        print('Patch already present on your system')
+        print('Patch already present on your system...')
         return True
     return False
 
 
 def setAlias(auto):
-    print('Please add the following line to your bashrc:\n\n')
-    print(Aliases.LINKSCRIPT + '\n')
+    print('Please add the following line to your bashrc:\n')
+    print('\t' + Aliases.LINKSCRIPT + '\n')
     if auto or input("\nAdd it automatically ? (y/N) ") == 'y':
         with open(Paths.BASHRC, 'a') as f:
             f.write(Aliases.FULL)
