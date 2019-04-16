@@ -41,4 +41,6 @@ def setAlias(auto):
     if auto or input("\nAdd it automatically ? (y/N) ") == 'y':
         with open(Paths.BASHRC, 'a') as f:
             f.write(Aliases.FULL)
-        subprocess.run('source ' + Paths.BASHRC, shell=True, check=True)
+        subprocess.run(Aliases.LINKSCRIPT, shell=True, check=True)
+        subprocess.run(Aliases.PY_BIN, shell=True, check=True)
+        subprocess.run(Aliases.PATH, shell=True, check=True)
