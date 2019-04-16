@@ -32,4 +32,7 @@ class Paths:
 class Aliases:
     COMMENT = '\n# Setup for Vim Packadd, do not remove\n'
     LINKSCRIPT = "alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'"
-    FULL = COMMENT + LINKSCRIPT
+    PY_BIN_SUB = """python -c 'import site; print(site.USER_BASE + "/bin")'"""
+    PY_BIN = 'export PY_BIN=$(' + PY_BIN_SUB + ')'
+    PATH = "export PATH=$PY_BIN:$PATH"
+    FULL = COMMENT + LINKSCRIPT + '\n' + PY_BIN + '\n' + PATH + '\n'
