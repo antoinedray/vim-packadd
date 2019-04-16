@@ -28,7 +28,7 @@ setup(
     entry_points = {
         'console_scripts': ['packadd = packadd.packadd:main'],
         'distutils.commands': [
-            'epita_install = epita.install:main',
+            'epita_install = epita.command:epita_install',
         ]
     },
     version = version,
