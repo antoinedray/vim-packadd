@@ -13,7 +13,7 @@ class epita_install(Command):
     description = 'installation for epita pie'
 
     user_options = [
-        ('auto', 'a', 'fully automate installation')
+        ('automate', 'a', 'fully automate installation')
     ]
 
     def initialize_options(self):
