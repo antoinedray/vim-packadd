@@ -32,4 +32,4 @@ class Paths:
 class Aliases:
     COMMENT = '\n# Setup for Vim Packadd, do not remove\n'
     LINKSCRIPT = "alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'"
-    FULL = COMMENT + PACK
+    FULL = COMMENT + LINKSCRIPT
