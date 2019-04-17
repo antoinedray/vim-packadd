@@ -19,8 +19,7 @@ def initFolders():
         os.makedirs(Paths.BIN)
         print('PY_BIN path created at ' + Paths.BIN)
     else:
-        pprint('PY_BIN already path created at ' + Paths.BIN)
-
+        print('PY_BIN already path created at ' + Paths.BIN)
 
 
 def moveFile(src, dst):
