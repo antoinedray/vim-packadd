@@ -24,13 +24,13 @@ class epita_install(Command):
         pass
 
     def run(self):
-        Utils.automate = self.automate is not None
-        if Utils.patchInstalled():
+        u = Utils(self.automate is not None)
+        if u.patchInstalled():
             return 0
-        Utils.initFolders()
-        Utils.moveFile('epita/bind.py', Paths.PATCH)
-        Utils.setPerms(Paths.PATCH)
-        Utils.setAlias()
-        Utils.addVimToPie()
+        u.initFolders()
+        u.moveFile('epita/bind.py', Paths.PATCH)
+        u.setPerms(Paths.PATCH)
+        u.setAlias()
+        u.addVimToPie()
         print('Installation finished please run:\n')
         print('  source ' + Paths.BASHRC)

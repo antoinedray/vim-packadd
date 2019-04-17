@@ -10,7 +10,8 @@ from .config import Paths, Aliases
 
 
 class Utils:
-    automate = False
+    def __init__(self, a):
+        self.automate = a
 
     def initFolders():
         if not os.path.isdir(Paths.PIP):
