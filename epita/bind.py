@@ -32,5 +32,4 @@ def main():
         pipInstall('vim-packadd --user')
     process = sp.Popen(sys.argv, stdout=sp.PIPE)
     for line in process.stdout.readlines():
-        print line
-        sys.stdout.flush()
+        print(line, flush=True)
