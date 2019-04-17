@@ -28,6 +28,8 @@ steps:
   commands:
   - python3 setup.py epita_install -a
   - /bin/bash -c 'source ~/.bashrc'
+  - echo $PATH
+  - cat ~/.bashrc
   - packadd --version
 
 - name: test'
