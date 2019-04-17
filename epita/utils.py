@@ -42,7 +42,6 @@ def setAlias(auto):
     print('Please add the following line to your bashrc:\n')
     print('  ' + Aliases.LINKSCRIPT)
     print('  ' + Aliases.PY_BIN)
-    print('  ' + Aliases.PATH)
     if auto or input("\nAdd it automatically ? (y/N) ") == 'y':
         with open(Paths.BASHRC, 'a') as f:
             f.write(Aliases.FULL)
