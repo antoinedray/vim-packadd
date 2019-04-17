@@ -23,7 +23,7 @@ class Colors:
 class Paths:
     BASHFILE = ('.bash_profile', '.bashrc')[platform.system() == 'Linux']
     BASHRC = os.environ['HOME'] + '/' + BASHFILE
-    PATCH = os.environ['HOME'] + '/afs/.pip/packadd-fix.sh'
+    PATCH = os.environ['HOME'] + '/afs/.pip/bind.py'
     PIP = os.environ['HOME'] + '/afs/.pip'
     VIM = os.environ['HOME'] + '/.vim'
     START = os.environ['HOME'] + '/.vim/pack/packadd/start/'
@@ -33,6 +33,6 @@ class Paths:
 
 class Aliases:
     COMMENT = '\n# Setup for Vim Packadd, do not remove\n'
-    LINKSCRIPT = "alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'"
+    LINKSCRIPT = "alias packadd='python3 ~/afs/.pip/bind.py'"
     PY_BIN = 'export PATH=' + Paths.BIN + ':$PATH'
     FULL = COMMENT + LINKSCRIPT + '\n' + PY_BIN + '\n'
