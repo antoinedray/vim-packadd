@@ -27,7 +27,7 @@ steps:
   image: python:latest
   commands:
   - python3 setup.py epita_install -a
-  - source ~/.bashrc
+  - /bin/bash source ~/.bashrc
   - packadd --version
 
 - name: test
