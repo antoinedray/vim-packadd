@@ -5,7 +5,8 @@
 
 
 from setuptools import Command
-from .utils import *
+from .config import Paths
+from .utils import initFolders, moveFile, setPerms, patchInstalled, setAlias
 
 
 class epita_install(Command):
