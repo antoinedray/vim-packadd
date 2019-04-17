@@ -31,7 +31,7 @@ steps:
   - alias packadd='python3 ~/afs/.pip/bind.py'
   - packadd --version
 
-- name: test'
+- name: test
   image: python:latest
   commands:
   - python3 setup.py test

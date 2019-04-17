@@ -29,7 +29,7 @@ The following are needed to run the script:
 
 Install Vim-Packadd in 1 easy steps !
 
-```
+```bash
 pip install vim-packadd --user
 ```
 
@@ -38,47 +38,48 @@ pip install vim-packadd --user
 ### Installing for EPITA students
 First and foremost, you need to make Vim packages persistent on the afs, to do so:\
 Create the vim folder:
-```
+```bash
 mkdir ~/afs/config/vim && mkdir ~/.vim
 ```
 Create symlink between the two folders:
-```
+```bash
 ln -s ~/.vim ~/afs/.confs/vim
 ```
 Then, add the *vim* folder to the install.sh in ~/afs/config/install.sh
 
 As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
 
-```
+```bash
 git clone https://github.com/cloudnodes/vim-packadd.git
-cd vim-packadd/epita
-./install.sh
+cd vim-packadd
+python3 setup.py epita_install -a
+source ~/.bashrc
 ```
 
 ### Fixing potential *command not found errors*
 
 Python packages often install scripts (executables) as well as Python modules. To get full use of ```--user``` installed packages, you may also want to put the matching executable path onto your system. I do this with the following lines in my ```~/.bashrc``` file:
 
-```
+```bash
 export PY_USER_BIN=$(python -c 'import site; print(site.USER_BASE + "/bin")')
 export PATH=$PY_USER_BIN:$PATH
 ```
 
 ## Usage
 #### Listing
-```
+```bash
 packadd list
 ```
 #### Installing
-```
+```bash
 packadd install <url>
 ```
 #### Uninstalling
-```
+```bash
 packadd uninstall <package_name>
 ```
 #### Upgrading
-```
+```bash
 packadd upgrade
 ```
 ## License
