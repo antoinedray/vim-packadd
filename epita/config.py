@@ -28,12 +28,12 @@ class Paths:
     VIM = os.environ['HOME'] + '/.vim'
     START = os.environ['HOME'] + '/.vim/pack/packadd/start/'
     OPT = os.environ['HOME'] + '/.vim/pack/packadd/opt/'
+    BIN = site.USER_BASE + '/bin'
 
 
 class Aliases:
     COMMENT = '\n# Setup for Vim Packadd, do not remove\n'
     LINKSCRIPT = "alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'"
-    PATH_TO_BIN = site.USER_BASE + '/bin'
-    PY_BIN = 'export PY_BIN=$(' + PATH_TO_BIN + ')'
+    PY_BIN = 'export PY_BIN=$(' + Paths.BIN + ')'
     PATH = "export PATH=$PY_BIN:$PATH"
     FULL = COMMENT + LINKSCRIPT + '\n' + PY_BIN + '\n' + PATH + '\n'
