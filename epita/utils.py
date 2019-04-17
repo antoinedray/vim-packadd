@@ -15,6 +15,12 @@ def initFolders():
         print('Permanent pip folder created at ~/afs/.pip')
     else:
         print('Permanent pip folder already created at ~/afs/.pip')
+    if not os.path.isdir(PATH_TO_BIN):
+        os.makedirs(Paths.PATH_TO_BIN)
+        print('PY_BIN path created at ' + Paths.PATH_TO_BIN)
+    else:
+        pprint('PY_BIN already path created at ' + Paths.PATH_TO_BIN)
+
 
 
 def moveFile(src, dst):
