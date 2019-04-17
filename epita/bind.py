@@ -27,9 +27,13 @@ def pipInstall(package):
 
 
 def main():
+    cmd = sys.argv
+    cmd[0] = '\\' + cmd[0]
+
     if not isInstalled():
         print('Reinstalling')
         pipInstall('vim-packadd --user')
-    process = sp.Popen('\\' + sys.argv, stdout=sp.PIPE)
+
+    process = sp.Popen(cmd, stdout=sp.PIPE)
     for line in process.stdout.readlines():
         print(line, flush=True)
