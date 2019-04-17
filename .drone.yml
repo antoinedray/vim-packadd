@@ -27,10 +27,8 @@ steps:
   image: python:latest
   commands:
   - python3 setup.py epita_install -a
-  - source ~/.bashrc
-  - echo $PATH
-  - cat ~/.bashrc
   - export PATH=/root/.local/bin:$PATH
+  - alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'
   - packadd --version
 
 - name: test'
