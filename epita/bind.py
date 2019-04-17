@@ -6,7 +6,7 @@
 
 import os
 import pip
-#import sys
+import sys
 import site
 import subprocess as sp
 
@@ -30,7 +30,7 @@ def main():
     if not isInstalled():
         print('Reinstalling')
         pipInstall('vim-packadd --user')
-    process = sp.Popen(sys.argv, stdout=PIPE)
-    #for line in process.stdout.readlines():
-    #    print line
-    #    sys.stdout.flush()
+    process = sp.Popen(sys.argv, stdout=sp.PIPE)
+    for line in process.stdout.readlines():
+        print line
+        sys.stdout.flush()
