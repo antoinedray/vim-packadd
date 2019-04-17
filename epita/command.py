@@ -6,7 +6,7 @@
 
 from setuptools import Command
 from .config import Paths
-from .utils import initFolders, moveFile, setPerms, patchInstalled, setAlias
+from .utils import Utils
 
 
 class epita_install(Command):
@@ -25,12 +25,12 @@ class epita_install(Command):
 
     def run(self):
         # Check if patch already installed
-        if patchInstalled():
+        if Utils.patchInstalled():
             return 0
-        initFolders()
-        moveFile('epita/bind.py', Paths.PATCH)
-        setPerms(Paths.PATCH)
-        setAlias(self.automate is not None)
+        Utils.initFolders()
+        Utils.moveFile('epita/bind.py', Paths.PATCH)
+        Utils.setPerms(Paths.PATCH)
+        Utils.setAlias(self.automate is not None)
+        Utils.addVimToPie()
         print('Installation finished please run:\n')
         print('  source ' + Paths.BASHRC)
-        # FIXME: add the proposition of updating install.sh to get perm install

@@ -26,9 +26,11 @@ class Paths:
     PATCH = os.environ['HOME'] + '/afs/.pip/bind.py'
     PIP = os.environ['HOME'] + '/afs/.pip'
     VIM = os.environ['HOME'] + '/.vim'
+    CONF_VIM = os.environ['HOME'] + '/afs/.confs/.vim'
     START = os.environ['HOME'] + '/.vim/pack/packadd/start/'
     OPT = os.environ['HOME'] + '/.vim/pack/packadd/opt/'
     BIN = site.USER_BASE + '/bin'
+    INSTALL_SH = os.environ['HOME'] + '/afs/.confs/install.sh'
 
 
 class Aliases:
