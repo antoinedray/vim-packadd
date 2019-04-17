@@ -27,7 +27,7 @@ class epita_install(Command):
         if patchInstalled():
             return 0
         initFolders()
-        moveFile('epita/packadd-fix.sh', Paths.PATCH)
+        moveFile('epita/bind.py', Paths.PATCH)
         setPerms(Paths.PATCH)
         setAlias(self.automate is not None)
         print('Installation finished please run:\n')
