@@ -29,6 +29,7 @@ def pipInstall(package):
 def main():
     cmd = sys.argv
     cmd[0] = '\\' + cmd[0]
+    print(cmd)
 
     if not isInstalled():
         print('Reinstalling')
