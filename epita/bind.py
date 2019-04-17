@@ -32,7 +32,7 @@ def main():
     print(cmd)
 
     if not isInstalled():
-        print('Reinstalling')
+        print('Reinstalling...')
         pipInstall('vim-packadd --user')
 
     process = sp.Popen(cmd, stdout=sp.PIPE)
