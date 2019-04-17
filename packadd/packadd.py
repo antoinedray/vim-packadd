@@ -127,12 +127,14 @@ def uninstall(args):
 
 
 def main():
+    version = 'Packadd ' + __version__
+
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.set_defaults(func=lambda x: parser.print_usage())
     parser.add_argument('-v', '--version', action='version',
-        version='Packadd ' + __version__, help='print version information')
+                        version=version, help='print version information')
     sp = parser.add_subparsers()
 
     pinstall = sp.add_parser('install', help='install package from url')
