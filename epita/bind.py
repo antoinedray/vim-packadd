@@ -31,4 +31,7 @@ def main():
     if not isInstalled():
         print('Reinstalling')
         pipInstall('vim-packadd --user')
-    sp.Popen(argv)
+    process = sp.Popen(argv, stdout=PIPE)
+    for line in process.stdout.readlines():
+        print line
+        sys.stdout.flush()
