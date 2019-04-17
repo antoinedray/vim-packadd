@@ -30,4 +30,6 @@ class epita_install(Command):
         moveFile('epita/packadd-fix.sh', Paths.PATCH)
         setPerms(Paths.PATCH)
         setAlias(self.automate is not None)
+        print('Installation finished please run:\n')
+        print('  source ' + Paths.BASHRC)
         # FIXME: add the proposition of updating install.sh to get perm install

@@ -6,7 +6,6 @@
 
 import os
 import shutil
-import subprocess
 from .config import Paths, Aliases
 
 
@@ -35,12 +34,9 @@ def patchInstalled():
 
 def setAlias(auto):
     print('Please add the following line to your bashrc:\n')
-    print('\t' + Aliases.LINKSCRIPT)
-    print('\t' + Aliases.PY_BIN)
-    print('\t' + Aliases.PATH)
+    print('  ' + Aliases.LINKSCRIPT)
+    print('  ' + Aliases.PY_BIN)
+    print('  ' + Aliases.PATH)
     if auto or input("\nAdd it automatically ? (y/N) ") == 'y':
         with open(Paths.BASHRC, 'a') as f:
             f.write(Aliases.FULL)
-        subprocess.run(Aliases.LINKSCRIPT, shell=True, check=True)
-        subprocess.run(Aliases.PY_BIN, shell=True, check=True)
-        subprocess.run(Aliases.PATH, shell=True, check=True)
