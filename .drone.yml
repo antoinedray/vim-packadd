@@ -28,7 +28,7 @@ steps:
   commands:
   - python3 setup.py epita_install -a
   - export PATH=/root/.local/bin:$PATH
-  - alias packadd='/bin/sh ~/afs/.pip/packadd-fix.sh'
+  - alias packadd='python3 ~/afs/.pip/bind.py'
   - packadd --version
 
 - name: test'
