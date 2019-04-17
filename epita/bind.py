@@ -38,3 +38,5 @@ def main():
     process = sp.Popen(cmd, stdout=sp.PIPE)
     for line in process.stdout.readlines():
         print(line, flush=True)
+    sd = child.communicate()[0]
+    rc = child.returncode
