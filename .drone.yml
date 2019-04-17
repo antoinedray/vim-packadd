@@ -27,10 +27,10 @@ steps:
   image: python:latest
   commands:
   - python3 setup.py epita_install -a
-  - /bin/bash -c source ~/.bashrc
+  - /bin/bash -c 'source ~/.bashrc'
   - packadd --version
 
-- name: test
+- name: test'
   image: python:latest
   commands:
   - python3 setup.py test
