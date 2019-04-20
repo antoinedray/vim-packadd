@@ -9,7 +9,9 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-from .epita.commands import epita_install
+from .epita.setuptools import Command
+from .epita.config import Paths
+from .epita.utils import Utils
 
 
 version = re.search(
@@ -21,6 +23,33 @@ version = re.search(
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
+
+class epita_install(Command):
+
+    description = 'installation for epita pie'
+
+    user_options = [
+        ('automate', 'a', 'fully automate installation')
+    ]
+
+    def initialize_options(self):
+        self.automate = None
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        u = Utils(self.automate is not None)
+        if Utils.patchInstalled():
+            return 0
+        Utils.initFolders()
+        Utils.moveFile('epita/bind.py', Paths.PATCH)
+        Utils.setPerms(Paths.PATCH)
+        u.setAlias()
+        u.addVimToPie()
+        print('Installation finished please run:\n')
+        print('  source ' + Paths.BASHRC)
 
 
 setup(
