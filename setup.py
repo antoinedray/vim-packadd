@@ -26,7 +26,7 @@ setup(
     name = "vim-packadd",
     packages = ["packadd"],
     cmdclass = {
-        'epita_install': epita.command:epita_install
+        'epita_install': ['epita_install = epita.command:epita_install']
     },
     entry_points = {
         #'distutils.commands': [
