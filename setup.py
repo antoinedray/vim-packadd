@@ -9,7 +9,7 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-from .epita.setuptools import Command
+from setuptools import Command
 from .epita.config import Paths
 from .epita.utils import Utils
 
