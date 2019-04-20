@@ -9,6 +9,7 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
+from .epita.commands import epita_install
 
 
 version = re.search(
@@ -25,10 +26,13 @@ with open("README.md", "r") as fh:
 setup(
     name = "vim-packadd",
     packages = ["packadd"],
+    cmdclass = {
+        'epita_install': epita_install
+    }
     entry_points = {
-        'distutils.commands': [
-            'epita_install = epita.command:epita_install',
-        ],
+        #'distutils.commands': [
+        #    'epita_install = epita.command:epita_install',
+        #],
         'console_scripts': ['packadd = packadd.packadd:main'],
     },
     version = version,
