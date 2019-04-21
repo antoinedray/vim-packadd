@@ -56,7 +56,8 @@ class Utils:
             os.symlink(src, dst)
         except Exception as e:
             print('Failed to create symlink between ' + src + ' and ' + dst)
-            print('Check that ' + src + ' exist and ' + dst + 'doesn\'t')
+            print('Check that ' + src + ' exist and ' + dst + ' doesn\'t')
+            print(str(e))
             sys.exit(1)
 
     def addVimToPie(self):
