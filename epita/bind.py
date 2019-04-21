@@ -20,14 +20,10 @@ def isInstalled():
 
 
 def pipInstall(package):
-    try:
-        if hasattr(pip, 'main'):
-            pip.main(['install', package])
-        else:
-            pip._internal.main(['install', package])
-    except Exception as e:
-        print('Failed to install packadd from Pip')
-        sys.exit(1)
+    if hasattr(pip, 'main'):
+        pip.main(['install', package])
+    else:
+        pip._internal.main(['install', package])
 
 
 def main():
