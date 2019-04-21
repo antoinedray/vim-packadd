@@ -52,8 +52,10 @@ class Utils:
             print('  ' + Aliases.PY_BIN + '\n')
 
     def createSymlink(src, dst):
+        # The dst folder must not exists when calling symlink but it's path
+        # must exists, thus the 2 first lines create the path up to dst
         head, tail = os.path.split(dst)
-        initFolders([head])
+        Utils.initFolders([head])
         try:
             os.symlink(src, dst)
         except Exception as e:
