@@ -66,7 +66,7 @@ class Utils:
         # The dst folder must not exists when calling symlink but it's path
         # must exists, thus the 2 first lines create the path up to dst
         head, tail = os.path.split(dst)
-        Utils.initFolders([head])
+        Utils.initFolders(self, [head])
         try:
             os.symlink(src, dst)
         except Exception as e:
