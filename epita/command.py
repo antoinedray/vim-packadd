@@ -31,6 +31,7 @@ class epita_install(Command):
         Utils.moveFile('epita/bind.py', Paths.PATCH)
         Utils.setPerms(Paths.PATCH)
         u.setAlias()
+        Utils.createSymlink(Paths.VIM, Paths.CONF_VIM)
         u.addVimToPie()
         print('Installation finished please run:\n')
         print('  source ' + Paths.BASHRC)

@@ -1,5 +1,5 @@
 # VIM Packadd
-[![Build Status](https://drone.antoinedray.me/api/badges/antoinedray/vim-packadd/status.svg)](https://drone.antoinedray.me/antoinedray/vim-packadd)
+[![Build Status](https://drone.vbernaud.fr/api/badges/antoinedray/vim-packadd/status.svg)](https://drone.vbernaud.fr/antoinedray/vim-packadd)
 
 Installing Vim packages made simpler
 =======================================
@@ -36,17 +36,6 @@ pip install vim-packadd --user
 **Note:** If you already installed packages without packadd, it is recomended to reinstall them so that packadd work on all packages installed on your system.
 
 ### Installing for EPITA students
-First and foremost, you need to make Vim packages persistent on the afs, to do so:\
-Create the vim folder:
-```bash
-mkdir ~/afs/config/vim && mkdir ~/.vim
-```
-Create symlink between the two folders:
-```bash
-ln -s ~/.vim ~/afs/.confs/vim
-```
-Then, add the *vim* folder to the install.sh in ~/afs/config/install.sh
-
 As pip installed packages gets deleted everytime you reboot the computer, I wrote a little script to reisntall the package on the first time you run a packadd command. To install it for Epita's computer, please run:
 
 ```bash
@@ -56,7 +45,7 @@ python3 setup.py epita_install -a
 source ~/.bashrc
 ```
 
-### Fixing potential *command not found errors*
+### Fixing potential ```command not found``` errors
 
 Python packages often install scripts (executables) as well as Python modules. To get full use of ```--user``` installed packages, you may also want to put the matching executable path onto your system. I do this with the following lines in my ```~/.bashrc``` file:
 

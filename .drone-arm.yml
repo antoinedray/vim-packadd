@@ -40,18 +40,3 @@ steps:
   commands:
   - pip3 install flake8
   - flake8 packadd/ epita/
-
-- name: deploy
-  image: python:latest
-  environment:
-    USERNAME:
-      from_secret: username
-    PASSWORD:
-      from_secret: password
-  commands:
-  - pip3 install twine
-  - python3 setup.py sdist
-  - twine upload $(ls dist/*.tar.gz) -u $USERNAME -p $PASSWORD
-  when:
-    branch:
-    - master

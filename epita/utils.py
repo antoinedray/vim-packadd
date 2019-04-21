@@ -5,6 +5,7 @@
 
 
 import os
+import sys
 import shutil
 from .config import Paths, Aliases
 
@@ -33,7 +34,11 @@ class Utils:
         shutil.copyfile(src, dst, follow_symlinks=True)
 
     def setPerms(path):
-        os.chmod(path, 0o555)
+        try:
+            os.chmod(path, 0o555)
+        except Exception as e:
+            print('Failed to set permissions on ' + path)
+            sys.exit(1)
 
     def patchInstalled():
         if os.path.isfile(Paths.PATCH):
@@ -49,14 +54,21 @@ class Utils:
             with open(Paths.BASHRC, 'a') as f:
                 f.write(Aliases.FULL)
 
-    def createSymlink():
-        os.symlink(Paths.VIM, Paths.CONF_VIM)
+    def createSymlink(src, dst):
+        try:
+            os.symlink(src, dst)
+        except Exception as e:
+            print('Failed to create symlink between ' + src + ' and ' + dst)
+            sys.exit(1)
 
     def addVimToPie(self):
         c = "\nAdd automatically vim folder to install.sh dotfiles ? (y/N) "
         if os.path.isfile(Paths.INSTALL_SH):
             if self.automate or input(c) == 'y':
                 with open(Paths.INSTALL_SH) as f:
-                    t = f.read().replace('dot_list="', 'dot_list="vim ')
-                with open(Paths.INSTALL_SH, "w") as f:
-                    f.write(t)
+                    if not 'vim' in f.read():
+                        t = f.read().replace('dot_list="', 'dot_list="vim ')
+                        with open(Paths.INSTALL_SH, "w") as f:
+                            f.write(t)
+        else:
+            print('Missing file ' + Paths.INSTALL_SH)
