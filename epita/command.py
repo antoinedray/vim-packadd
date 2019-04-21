@@ -31,11 +31,11 @@ class epita_install(Command):
         u = Utils(automate, debug)
         if Utils.patchInstalled():
             return 0
-        Utils.initFolders([Paths.PIP, Paths.BIN, Paths.VIM])
-        Utils.moveFile('epita/bind.py', Paths.PATCH)
-        Utils.setPerms(Paths.PATCH)
+        u.initFolders([Paths.PIP, Paths.BIN, Paths.VIM])
+        u.moveFile('epita/bind.py', Paths.PATCH)
+        u.setPerms(Paths.PATCH)
         u.setAlias()
-        Utils.createSymlink(Paths.VIM, Paths.CONF_VIM)
+        u.createSymlink(Paths.VIM, Paths.CONF_VIM)
         u.addVimToPie()
         print('Installation finished please run:\n')
         print('  source ' + Paths.BASHRC + '\n')

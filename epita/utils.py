@@ -62,7 +62,7 @@ class Utils:
             print('  ' + Aliases.LINKSCRIPT)
             print('  ' + Aliases.PY_BIN + '\n')
 
-    def createSymlink(src, dst):
+    def createSymlink(self, src, dst):
         # The dst folder must not exists when calling symlink but it's path
         # must exists, thus the 2 first lines create the path up to dst
         head, tail = os.path.split(dst)
