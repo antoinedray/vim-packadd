@@ -53,7 +53,7 @@ class Utils:
 
     def createSymlink(src, dst):
         head, tail = os.path.split(dst)
-        os.path.makedirs(head)
+        initFolders([head])
         try:
             os.symlink(src, dst)
         except Exception as e:
