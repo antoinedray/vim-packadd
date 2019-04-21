@@ -14,7 +14,7 @@ class epita_install(Command):
     description = 'installation for epita pie'
 
     user_options = [
-        ('automate', 'a', 'fully automate installation')
+        ('automate', 'a', 'fully automate installation'),
         ('debug', 'd', 'enables debug for installation')
     ]
 
