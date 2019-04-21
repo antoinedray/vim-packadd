@@ -43,18 +43,20 @@ class Utils:
         return False
 
     def setAlias(self):
-        print('Please add the following line to your bashrc:\n')
-        print('  ' + Aliases.LINKSCRIPT)
-        print('  ' + Aliases.PY_BIN)
         if self.automate or input("\nAdd it automatically ? (y/N) ") == 'y':
             with open(Paths.BASHRC, 'a') as f:
                 f.write(Aliases.FULL)
+        else:
+            print('Please add the following line to your bashrc:\n')
+            print('  ' + Aliases.LINKSCRIPT)
+            print('  ' + Aliases.PY_BIN + '\n')
 
     def createSymlink(src, dst):
         try:
             os.symlink(src, dst)
         except Exception as e:
             print('Failed to create symlink between ' + src + ' and ' + dst)
+            print >> sys.stderr, "Exception: %s" % str(e)
             sys.exit(1)
 
     def addVimToPie(self):
