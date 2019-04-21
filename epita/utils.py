@@ -14,21 +14,17 @@ class Utils:
     def __init__(self, a):
         self.automate = a
 
-    def initFolders():
-        if not os.path.isdir(Paths.PIP):
-            os.makedirs(Paths.PIP)
-            print('Permanent pip folder created at ~/afs/.pip')
-        else:
-            print('Permanent pip folder already created at ~/afs/.pip')
-        if not os.path.isdir(Paths.BIN):
-            os.makedirs(Paths.BIN)
-            print('PY_BIN path created at ' + Paths.BIN)
-        else:
-            print('PY_BIN already path created at ' + Paths.BIN)
-        if not os.path.isdir(Paths.VIM):
-            os.makedirs(Paths.VIM)
-        if not os.path.isdir(Paths.CONF_VIM):
-            os.makedirs(Paths.CONF_VIM)
+    def initFolders(folders):
+        for f in folders:
+            if not os.path.isdir(f):
+                try:
+                    os.makedirs(f)
+                    print('Folder created at ' + f)
+                except Exception as e:
+                    print('Could not create folder at ' + f)
+                    sys.exit(1)
+            else:
+                print('Folder already created at ' + f)
 
     def moveFile(src, dst):
         shutil.copyfile(src, dst, follow_symlinks=True)

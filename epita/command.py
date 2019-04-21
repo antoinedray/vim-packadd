@@ -27,7 +27,7 @@ class epita_install(Command):
         u = Utils(self.automate is not None)
         if Utils.patchInstalled():
             return 0
-        Utils.initFolders()
+        Utils.initFolders([PIP, BIN, VIM, CONF_VIM])
         Utils.moveFile('epita/bind.py', Paths.PATCH)
         Utils.setPerms(Paths.PATCH)
         u.setAlias()
