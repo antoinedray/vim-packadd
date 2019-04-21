@@ -52,6 +52,8 @@ class Utils:
             print('  ' + Aliases.PY_BIN + '\n')
 
     def createSymlink(src, dst):
+        head, tail = os.path.split(dst)
+        os.path.makedirs(head)
         try:
             os.symlink(src, dst)
         except Exception as e:
