@@ -26,7 +26,9 @@ class epita_install(Command):
         pass
 
     def run(self):
-        u = Utils(self.automate is not None)
+        automate = self.automate is not None
+        debug = self.debug is not None
+        u = Utils(automate, debug)
         if Utils.patchInstalled():
             return 0
         Utils.initFolders([Paths.PIP, Paths.BIN, Paths.VIM])
