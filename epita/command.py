@@ -15,10 +15,12 @@ class epita_install(Command):
 
     user_options = [
         ('automate', 'a', 'fully automate installation')
+        ('debug', 'd', 'enables debug for installation')
     ]
 
     def initialize_options(self):
         self.automate = None
+        self.debug = None
 
     def finalize_options(self):
         pass
@@ -34,4 +36,4 @@ class epita_install(Command):
         Utils.createSymlink(Paths.VIM, Paths.CONF_VIM)
         u.addVimToPie()
         print('Installation finished please run:\n')
-        print('  source ' + Paths.BASHRC)
+        print('  source ' + Paths.BASHRC + '\n')
