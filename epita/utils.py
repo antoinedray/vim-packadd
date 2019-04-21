@@ -52,12 +52,13 @@ class Utils:
             print('  ' + Aliases.PY_BIN + '\n')
 
     def createSymlink(src, dst):
-        try:
-            os.symlink(src, dst)
-        except Exception as e:
-            print('Failed to create symlink between ' + src + ' and ' + dst)
-            print >> sys.stderr, "Exception: %s" % str(e)
-            sys.exit(1)
+        if os.path.isdir(src) and os.path.isdir(dst):
+            try:
+                os.symlink(src, dst)
+            except Exception as e:
+                print('Failed to create symlink between ' + src + ' and ' + dst)
+                print('Exception: ' + str(e))
+                sys.exit(1)
 
     def addVimToPie(self):
         c = "\nAdd automatically vim folder to install.sh dotfiles ? (y/N) "
