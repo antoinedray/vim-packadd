@@ -6,7 +6,7 @@
 
 import os
 #import pip
-from pip._internal import install
+from pip._internal import main as install
 import sys
 import site
 import subprocess as sp
@@ -26,7 +26,7 @@ def pipInstall(package):
     #if hasattr(pip, 'main'):
     #pip.main(['install', package])
     #else:
-    #    pip._internal.main(['install', package])
+    #pip._internal.main(['install', package])
 
 
 def main():
