@@ -5,7 +5,8 @@
 
 
 import os
-import pip
+#import pip
+from pip._internal import install
 import sys
 import site
 import subprocess as sp
@@ -21,8 +22,9 @@ def isInstalled():
 
 
 def pipInstall(package):
+    install(['install', package])
     #if hasattr(pip, 'main'):
-    pip.main(['install', package])
+    #pip.main(['install', package])
     #else:
     #    pip._internal.main(['install', package])
 
