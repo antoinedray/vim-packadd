@@ -12,10 +12,11 @@ import subprocess as sp
 
 
 def isInstalled():
-    with os.scandir(site.USER_SITE) as d:
-        for entry in d:
-            if 'vim-packadd' in str(entry):
-                return True
+    if os.path.isdir(site.USER_SITE):
+        with os.scandir(site.USER_SITE) as d:
+            for entry in d:
+                if 'vim-packadd' in str(entry):
+                    return True
     return False
 
 
