@@ -21,10 +21,10 @@ def isInstalled():
 
 
 def pipInstall(package):
-    if hasattr(pip, 'main'):
-        pip.main(['install', package])
-    else:
-        pip._internal.main(['install', package])
+    #if hasattr(pip, 'main'):
+    pip.main(['install', package])
+    #else:
+    #    pip._internal.main(['install', package])
 
 
 def main():
@@ -36,7 +36,7 @@ def main():
         print('Reinstalling...')
         pipInstall('vim-packadd --user')
 
-    process = sp.Popen('\\' + cmd, stdout=sp.PIPE)
+    process = sp.Popen(cmd, stdout=sp.PIPE)
     for line in process.stdout.readlines():
         print(line, flush=True)
     process.communicate()[0]
