@@ -31,7 +31,8 @@ def pipInstall(package):
 
 def main():
     cmd = sys.argv
-    #cmd[0] = '\\' + cmd[0]
+    cmd[1] = '\packadd'
+    cmd.pop(0)
     #print(cmd)
 
     if not isInstalled():
