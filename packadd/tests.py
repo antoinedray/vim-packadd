@@ -7,7 +7,7 @@
 import os
 import argparse
 import unittest
-from .packadd import init_repo, install, uninstall, upgrade
+from .packadd import initRepo, install, uninstall, upgrade
 from .config import Paths
 
 
@@ -21,26 +21,26 @@ class TestStringMethods(unittest.TestCase):
         self.puni.add_argument('package')
         self.plist = self.subparser.add_parser('list')
 
-    def test_init_repo(self):
-        init_repo()
+    def testInitRepo(self):
+        initRepo()
         self.assertTrue(os.path.isdir(Paths.VIM))
 
-    def test_install(self):
+    def testInstall(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbox.git'])
         install(args)
         self.assertTrue(os.path.isdir(Paths.START + '/gruvbox'))
 
-    def test_install_unexisting(self):
+    def testInstallUnexisting(self):
         args = self.pi.parse_args(['https://github.com/morhetz/gruvbo.git'])
         install(args)
         self.assertFalse(os.path.isdir(Paths.START + '/gruvbo'))
 
-    def test_uninstall(self):
+    def testUninstall(self):
         args = self.puni.parse_args(['gruvbox'])
         uninstall(args)
         self.assertFalse(os.path.isdir(Paths.START + '/gruvbox'))
 
-    def test_uptodate_upgrade(self):
+    def testUptodateUpgrade(self):
         args = self.pi.parse_args(['https://github.com/tomasr/molokai.git'])
         install(args)
         try:
