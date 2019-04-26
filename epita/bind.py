@@ -27,6 +27,7 @@ def pipInstall(package):
 
 
 def main():
+    print(sys.argv)
     cmd = sys.argv
     cmd[0] = '\\' + cmd[0]
     print(cmd)
