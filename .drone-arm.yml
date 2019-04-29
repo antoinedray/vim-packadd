@@ -28,7 +28,7 @@ steps:
   commands:
   - python3 setup.py epita_install -a
   - export PATH=/root/.local/bin:$PATH
-  - python3 ~/afs/.pip/bind.py packadd --version
+  - /bin/sh ~/afs/.pip/packadd.sh packadd --version
 
 - name: test
   image: python:latest
