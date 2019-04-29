@@ -32,7 +32,7 @@ class epita_install(Command):
         if Utils.patchInstalled():
             return 0
         u.initFolders([Paths.PIP, Paths.BIN, Paths.VIM])
-        u.moveFile('epita/bind.py', Paths.PATCH)
+        u.moveFile('epita/packadd.sh', Paths.PATCH)
         u.setPerms(Paths.PATCH)
         u.setAlias()
         u.createSymlink(Paths.VIM, Paths.CONF_VIM)
