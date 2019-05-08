@@ -9,7 +9,6 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-from .packadd.epita.command import epita_install
 
 
 version = re.search(
@@ -36,9 +35,12 @@ setup(
     url = 'https://github.com/antoinedray/vim-packadd',
     license = 'MIT',
     packages = [ 'packadd' ],
-    cmdclass = { 'epita_install': epita_install },
+    #cmdclass = { 'epita_install': epita_install },
     entry_points = {
         'console_scripts': [ 'packadd = packadd.packadd:main' ],
+        'distutils.commands': [
+            'epita_install = packadd.command:epita_install',
+        ],
     },
     install_requires = [ 'gitpython' ],
     test_suite = 'packadd.tests',
