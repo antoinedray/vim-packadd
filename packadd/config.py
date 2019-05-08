@@ -9,6 +9,13 @@ import site
 import platform
 
 
+class Aliases:
+    COMMENT = '\n# Setup for Vim Packadd, do not remove\n'
+    LINKSCRIPT = "alias packadd='/bin/sh ~/afs/.pip/packadd.sh'"
+    PY_BIN = 'export PATH=' + Paths.BIN + ':$PATH'
+    FULL = COMMENT + LINKSCRIPT + '\n' + PY_BIN + '\n'
+
+
 class Colors:
     HEADER = '\033[95m'
     INFO = '\033[94m'
@@ -33,8 +40,11 @@ class Paths:
     INSTALL_SH = os.environ['HOME'] + '/afs/.confs/install.sh'
 
 
-class Aliases:
-    COMMENT = '\n# Setup for Vim Packadd, do not remove\n'
-    LINKSCRIPT = "alias packadd='/bin/sh ~/afs/.pip/packadd.sh'"
-    PY_BIN = 'export PATH=' + Paths.BIN + ':$PATH'
-    FULL = COMMENT + LINKSCRIPT + '\n' + PY_BIN + '\n'
+class Prints:
+    PRE_INFO = Colors.INFO + Colors.BOLD + '> ' + Colors.END
+    PRE_INFO_L = Colors.INFO + Colors.BOLD + '==> ' + Colors.END
+    PRE_FAIL = Colors.FAIL + Colors.BOLD + '> ' + Colors.END
+    PRE_FAIL_L = Colors.FAIL + Colors.BOLD + '==> ' + Colors.END
+    PRE_OK = Colors.OK + Colors.BOLD + '> ' + Colors.END
+    PRE_OK_L = Colors.OK + Colors.BOLD + '==> ' + Colors.END
+    PRE_LIST = Colors.INFO + Colors.BOLD + '  - ' + Colors.END
