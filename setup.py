@@ -28,6 +28,8 @@ setup(
     version = version,
     author = 'Antoine Dray',
     author_email = 'antoine.dray@epita.fr',
+    maintainer = 'Antoine Dray',
+    maintainer_email = 'antoine.dray@epita.fr',
     description = 'Package manager for Vim8.',
     long_description = long_description,
     long_description_content_type = 'text/markdown',
@@ -38,7 +40,7 @@ setup(
     entry_points = {
         'console_scripts': [ 'packadd = packadd.packadd:main' ],
     },
-    data_files = [ ('epita', [ '*.sh' ]) ],
+    data_files = [ ('epita', []) ],
     install_requires = [ 'gitpython' ],
     test_suite = 'packadd.tests',
 )
