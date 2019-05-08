@@ -9,7 +9,7 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-from epita.command import epita_install
+from packadd.epita.command import epita_install
 
 
 version = re.search(
