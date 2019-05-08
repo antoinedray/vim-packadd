@@ -4,7 +4,7 @@
 python3 -m site &> /dev/null && PATH="$PATH:`python3 -m site --user-base`/bin"
 
 command_exists() {
-    command -v "$1" &> /dev/null
+    command -v "$1"
 }
 
 packadd_fix() {
