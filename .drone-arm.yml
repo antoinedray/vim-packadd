@@ -40,4 +40,4 @@ steps:
   image: python:latest
   commands:
   - pip3 install flake8
-  - flake8 packadd/ epita/
+  - flake8 packadd/
