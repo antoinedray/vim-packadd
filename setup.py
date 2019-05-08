@@ -35,7 +35,7 @@ setup(
     url = 'https://github.com/antoinedray/vim-packadd',
     license = 'MIT',
     packages = [ 'packadd' ],
-    #cmdclass = { 'epita_install': epita_install },
+    package_data = { '': ['*.md', '*.rst'], },
     entry_points = {
         'console_scripts': [ 'packadd = packadd.packadd:main' ],
         'distutils.commands': [
