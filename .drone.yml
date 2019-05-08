@@ -28,7 +28,7 @@ steps:
   - python3 setup.py epita_install -a
   - export PY_USER_BIN=$(python -c 'import site; print(site.USER_BASE + "/bin")')
   - export PATH=$PY_USER_BIN:$PATH
-  - /bin/sh ~/afs/.pip/packadd.sh packadd --version
+#  - /bin/sh ~/afs/.pip/packadd.sh packadd --version
 
 - name: test
   image: python:latest
