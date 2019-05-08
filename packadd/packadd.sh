@@ -9,7 +9,6 @@ command_exists() {
 
 packadd_fix() {
     if ! command_exists packadd; then
-        echo "packadd does not yet exists"
         $(pip install --user vim-packadd)
     fi
 }
