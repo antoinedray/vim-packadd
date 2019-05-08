@@ -35,7 +35,8 @@ setup(
     url = 'https://github.com/antoinedray/vim-packadd',
     license = 'MIT',
     packages = [ 'packadd' ],
-    package_data = { '': ['*.md', '*.rst'], },
+    package_data = { '.': ['*.md', '*.rst'], },
+    data_files=[ ('.', ['README.md']) ],
     entry_points = {
         'console_scripts': [ 'packadd = packadd.packadd:main' ],
         'distutils.commands': [
