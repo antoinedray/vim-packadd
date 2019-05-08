@@ -40,7 +40,6 @@ setup(
     entry_points = {
         'console_scripts': [ 'packadd = packadd.packadd:main' ],
     },
-    data_files = [ ('epita', []) ],
     install_requires = [ 'gitpython' ],
     test_suite = 'packadd.tests',
 )
