@@ -22,6 +22,7 @@ class TestStringMethods(unittest.TestCase):
         self.plist = self.subparser.add_parser('list')
 
     def testInitRepo(self):
+        initFolders()
         initRepo()
         self.assertTrue(os.path.isdir(Paths.VIM))
 
