@@ -7,7 +7,7 @@
 import os
 import argparse
 import unittest
-from .packadd import initRepo, install, uninstall, upgrade
+from .packadd import checkRepo, initRepo, install, uninstall, upgrade
 from .config import Paths
 
 
@@ -22,7 +22,7 @@ class TestStringMethods(unittest.TestCase):
         self.plist = self.subparser.add_parser('list')
 
     def testInitRepo(self):
-        initFolders()
+        checkRepo()
         initRepo()
         self.assertTrue(os.path.isdir(Paths.VIM))
 
