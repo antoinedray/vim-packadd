@@ -4,7 +4,7 @@
 """packadd.packadd: provides entry point main()."""
 
 
-__version__ = "0.6.3"
+__version__ = "0.6.4"
 
 
 import os
@@ -46,7 +46,7 @@ def initFolders():
 
 
 def initRepo():
-    with open(Paths.VIM + '.gitignore', 'a') as vim:
+    with open(Paths.VIM + '/.gitignore', 'a') as vim:
         vim.write('*\n!pack/packadd\n')
     repo = git.Repo.init(Paths.VIM)
     repo.git.submodule('init')
