@@ -46,7 +46,7 @@ def initFolders():
 
 
 def initRepo():
-    with open(Paths.VIM + '/.gitignore', 'a') as vim:
+    with open(Paths.VIM + '.gitignore', 'a') as vim:
         vim.write('*\n!pack/packadd\n')
     repo = git.Repo.init(Paths.VIM)
     repo.git.submodule('init')

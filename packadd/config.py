@@ -24,13 +24,13 @@ class Paths:
     BASHFILE = ('.bash_profile', '.bashrc')[platform.system() == 'Linux']
     BASHRC = os.environ['HOME'] + '/' + BASHFILE
     BIN = site.USER_BASE + '/bin'
-    CONF_VIM = os.environ['HOME'] + '/afs/.confs/.vim'
+    CONF_VIM = os.environ['HOME'] + '/afs/.confs/.vim/'
     INSTALL_SH = os.environ['HOME'] + '/afs/.confs/install.sh'
     PATCH = os.environ['HOME'] + '/afs/.pip/packadd.sh'
     PIP = os.environ['HOME'] + '/afs/.pip'
     START = os.environ['HOME'] + '/.vim/pack/packadd/start/'
     OPT = os.environ['HOME'] + '/.vim/pack/packadd/opt/'
-    VIM = os.environ['HOME'] + '/.vim'
+    VIM = os.environ['HOME'] + '/.vim/'
 
 
 class Prints:
