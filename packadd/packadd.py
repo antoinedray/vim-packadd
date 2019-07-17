@@ -4,7 +4,7 @@
 """packadd.packadd: provides entry point main()."""
 
 
-__version__ = "0.6.3"
+__version__ = "0.6.4"
 
 
 import os
